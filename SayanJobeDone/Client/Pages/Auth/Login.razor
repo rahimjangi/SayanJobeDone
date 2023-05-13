@@ -1,0 +1,46 @@
+﻿@page "/login"
+@*@using YourApp.Models*@
+@using Microsoft.AspNetCore.Components.Forms
+
+<h2>Login</h2>
+
+<EditForm Model="@loginModel" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="loginModel.Email" />
+        <ValidationMessage For="@(() => loginModel.Email)" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <InputText id="password" class="form-control" type="password" @bind-Value="loginModel.Password" />
+        <ValidationMessage For="@(() => loginModel.Password)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private void HandleSubmit()
+    {
+        if (loginModel.Email == "example@example.com" && loginModel.Password == "password")
+        {
+            // TODO: Perform login logic
+        }
+        else
+        {
+            // TODO: Show login error message
+        }
+    }
+
+    public class LoginModel
+    {
+
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+    }
+}

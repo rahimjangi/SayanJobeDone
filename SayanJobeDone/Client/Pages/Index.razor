@@ -1,0 +1,67 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+<h1>Welcome to YourApp!</h1>
+
+<p class="lead">Find trusted domestic service providers for all your needs.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>How It Works</h2>
+        <ul>
+            <li>Choose from a variety of domestic services.</li>
+            <li>View service providers and their profiles.</li>
+            <li>Select your preferred provider and book the service.</li>
+            <li>Enjoy hassle-free and reliable service delivery.</li>
+        </ul>
+        <a class="btn btn-primary" href="/services">Explore Our Services</a>
+    </div>
+    <div class="col-md-6">
+        <h2>Why Choose Us</h2>
+        <ul>
+            <li>Experienced and background-checked service providers.</li>
+            <li>Convenient online booking and scheduling.</li>
+            <li>Transparent pricing and secure payment options.</li>
+            <li>Excellent customer support for any inquiries or issues.</li>
+        </ul>
+        <a class="btn btn-primary" href="/about">Learn More About Us</a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12 text-center">
+        <h2>Customer Testimonials</h2>
+        <div class="testimonial-container">
+            @foreach (var testimonial in Testimonials)
+            {
+                <div class="testimonial">
+                    <p class="testimonial-text">@testimonial.Content</p>
+                    <p class="testimonial-author">- @testimonial.Author</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12 text-center">
+        <p>Already have an account? <a href="/login">Log in</a></p>
+        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </div>
+</div>
+
+@code {
+    // Mock data for testimonials
+    List<Testimonial> Testimonials = new List<Testimonial>
+    {
+        new Testimonial { Content = "YourApp is fantastic! It made finding a reliable cleaner so easy.", Author = "John Doe" },
+        new Testimonial { Content = "I highly recommend YourApp. I found an amazing pet sitter through the platform.", Author = "Jane Smith" },
+        new Testimonial { Content = "Great experience with YourApp. The gardening service was top-notch.", Author = "David Wilson" }
+    };
+
+    public class Testimonial
+    {
+        public string Content { get; set; }
+        public string Author { get; set; }
+    }
+}
