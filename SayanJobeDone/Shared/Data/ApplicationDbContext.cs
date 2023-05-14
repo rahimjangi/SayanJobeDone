@@ -136,6 +136,39 @@ namespace SayanJobeDone.Shared.Data
                 new Category(){Name="Personal Assistance",Description="Providing assistance with tasks like running errands, shopping, scheduling appointments, and managing household logistics."},
             }
 
+             );
+            modelBuilder.Entity<Skill>().HasData(
+                    new List<Skill>()
+                    {
+                        new Skill(){Name="Cooking and Meal Preparation",ExperienceLevel=1},
+                        new Skill(){Name="Cleaning and Housekeeping",ExperienceLevel=1},
+                        new Skill(){Name="Laundry and Ironing",ExperienceLevel=1},
+                        new Skill(){Name="Organization and Decluttering",ExperienceLevel=1},
+                        new Skill(){Name="Grocery Shopping and Meal Planning",ExperienceLevel=1},
+                        new Skill(){Name="Childcare and Babysitting",ExperienceLevel=1},
+                        new Skill(){Name="Elderly Care and Companionship",ExperienceLevel=1},
+                        new Skill(){Name="Pet Care (feeding, walking, grooming)",ExperienceLevel=1},
+                        new Skill(){Name="Gardening and Yard Maintenance",ExperienceLevel=1},
+                        new Skill(){Name="Basic Home Repairs and Maintenance",ExperienceLevel=1},
+                        new Skill(){Name="Sewing and Mending",ExperienceLevel=1},
+                        new Skill(){Name="Home Decorating and Interior Design",ExperienceLevel=1},
+                        new Skill(){Name="Event Planning and Hosting",ExperienceLevel=1},
+                        new Skill(){Name="Budgeting and Financial Management",ExperienceLevel=1},
+                        new Skill(){Name="Time Management and Scheduling",ExperienceLevel=1},
+                        new Skill(){Name="Communication and Interpersonal Skills",ExperienceLevel=1},
+                        new Skill(){Name="Problem Solving and Troubleshooting",ExperienceLevel=1},
+                        new Skill(){Name="First Aid and CPR",ExperienceLevel=1},
+                        new Skill(){Name="Driving and Transportation",ExperienceLevel=1},
+                        new Skill(){Name="Technology Skills (computer use, smartphone usage)",ExperienceLevel=1},
+                        new Skill(){Name="DIY Projects and Crafts",ExperienceLevel=1},
+                        new Skill(){Name="Home Security and Safety Awareness",ExperienceLevel=1},
+                        new Skill(){Name="Personal Care (hairstyling, skincare, grooming)",ExperienceLevel=1},
+                        new Skill(){Name="Fitness and Exercise Training",ExperienceLevel=1},
+                        new Skill(){Name="Language Skills (teaching, translation)",ExperienceLevel=1},
+                        new Skill(){Name="Teaching and Tutoring",ExperienceLevel=1},
+                        new Skill(){Name="Handyman Skills (basic plumbing, electrical, carpentry)",ExperienceLevel=1},
+
+                    }
                 );
 
 
