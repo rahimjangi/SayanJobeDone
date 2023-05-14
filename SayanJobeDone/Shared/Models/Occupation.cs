@@ -7,6 +7,6 @@ namespace SayanJobeDone.Shared.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Occupation name is required")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }
