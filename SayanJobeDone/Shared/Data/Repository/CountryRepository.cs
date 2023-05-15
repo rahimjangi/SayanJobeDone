@@ -12,32 +12,32 @@ public class CountryRepository : ICountryRepository
         _db = db;
     }
 
-    public Task Add(Country entity)
+    public Task Add(CountryDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Country>> GetAll(Expression<Func<Country, bool>>? filter = null, Func<IQueryable<Country>, IOrderedQueryable<Country>>? orderby = null, string? includeProperties = null)
+    public Task<List<CountryDto>> GetAll(Expression<Func<CountryDto, bool>>? filter = null, Func<IQueryable<CountryDto>, IOrderedQueryable<CountryDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Country> GetFirstOrDefault(Expression<Func<Country, bool>>? filter = null, string? includeProperties = null)
+    public Task<CountryDto> GetFirstOrDefault(Expression<Func<CountryDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(Country entity)
+    public Task Remove(CountryDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<Country> entities)
+    public Task RemoveRange(IEnumerable<CountryDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Country> Update(Country entity)
+    public Task<CountryDto> Update(CountryDto entity)
     {
         throw new NotImplementedException();
     }

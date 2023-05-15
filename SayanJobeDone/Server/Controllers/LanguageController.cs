@@ -16,7 +16,7 @@ public class LanguageController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Language>>> GetAll()
+    public async Task<ActionResult<List<LanguageDto>>> GetAll()
     {
         var result = await _repo.Language.GetAll();
 
@@ -24,7 +24,7 @@ public class LanguageController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Language>> Get(int id)
+    public async Task<ActionResult<LanguageDto>> Get(int id)
     {
         var result = await _repo.Language.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class LanguageController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<Language>> Create(Language obj)
+    public async Task<ActionResult<LanguageDto>> Create(LanguageDto obj)
     {
         await _repo.Language.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Language>> Update(Language obj)
+    public async Task<ActionResult<LanguageDto>> Update(LanguageDto obj)
     {
         var updatetObject = await _repo.Language.Update(obj);
         return Ok(updatetObject);

@@ -13,32 +13,32 @@ public class LanguageRepository : ILanguageRepository
         _db = db;
     }
 
-    public Task Add(Language entity)
+    public Task Add(LanguageDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Language>> GetAll(Expression<Func<Language, bool>>? filter = null, Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderby = null, string? includeProperties = null)
+    public Task<List<LanguageDto>> GetAll(Expression<Func<LanguageDto, bool>>? filter = null, Func<IQueryable<LanguageDto>, IOrderedQueryable<LanguageDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Language> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
+    public Task<LanguageDto> GetFirstOrDefault(Expression<Func<LanguageDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(Language entity)
+    public Task Remove(LanguageDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<Language> entities)
+    public Task RemoveRange(IEnumerable<LanguageDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Language> Update(Language entity)
+    public Task<LanguageDto> Update(LanguageDto entity)
     {
         throw new NotImplementedException();
     }

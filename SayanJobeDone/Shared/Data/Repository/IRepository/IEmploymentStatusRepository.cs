@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IEmploymentStatusRepository : IRepository<EmploymentStatus>
+public interface IEmploymentStatusRepository : IRepository<EmploymentStatusDto>
 {
 }

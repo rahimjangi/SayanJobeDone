@@ -16,7 +16,7 @@ public class AddressController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Address>>> GetAll()
+    public async Task<ActionResult<List<AddressDto>>> GetAll()
     {
         var result = await _repo.Address.GetAll();
 
@@ -24,21 +24,21 @@ public class AddressController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Address>> Get(int id)
+    public async Task<ActionResult<AddressDto>> Get(int id)
     {
         var result = await _repo.Address.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
     }
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<Address>> Create(Address address)
+    public async Task<ActionResult<AddressDto>> Create(AddressDto address)
     {
         await _repo.Address.Add(address);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Address>> Update(Address address)
+    public async Task<ActionResult<AddressDto>> Update(AddressDto address)
     {
         var updatetObject = await _repo.Address.Update(address);
         return Ok(updatetObject);

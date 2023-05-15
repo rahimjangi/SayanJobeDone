@@ -16,7 +16,7 @@ public class SignUpModelController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<SignUpModel>>> GetAll()
+    public async Task<ActionResult<List<SignUpModelDto>>> GetAll()
     {
         var result = await _repo.SignUpModel.GetAll();
 
@@ -24,7 +24,7 @@ public class SignUpModelController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<SignUpModel>> Get(int id)
+    public async Task<ActionResult<SignUpModelDto>> Get(int id)
     {
         var result = await _repo.SignUpModel.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class SignUpModelController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<SignUpModel>> Create(SignUpModel obj)
+    public async Task<ActionResult<SignUpModelDto>> Create(SignUpModelDto obj)
     {
         await _repo.SignUpModel.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<SignUpModel>> Update(SignUpModel obj)
+    public async Task<ActionResult<SignUpModelDto>> Update(SignUpModelDto obj)
     {
         var updatetObject = await _repo.SignUpModel.Update(obj);
         return Ok(updatetObject);

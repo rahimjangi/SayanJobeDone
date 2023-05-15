@@ -13,32 +13,32 @@ public class NationalityRepository : INationalityRepository
         _db = db;
     }
 
-    public Task Add(Nationality entity)
+    public Task Add(NationalityDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Nationality>> GetAll(Expression<Func<Nationality, bool>>? filter = null, Func<IQueryable<Nationality>, IOrderedQueryable<Nationality>>? orderby = null, string? includeProperties = null)
+    public Task<List<NationalityDto>> GetAll(Expression<Func<NationalityDto, bool>>? filter = null, Func<IQueryable<NationalityDto>, IOrderedQueryable<NationalityDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Nationality> GetFirstOrDefault(Expression<Func<Nationality, bool>>? filter = null, string? includeProperties = null)
+    public Task<NationalityDto> GetFirstOrDefault(Expression<Func<NationalityDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(Nationality entity)
+    public Task Remove(NationalityDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<Nationality> entities)
+    public Task RemoveRange(IEnumerable<NationalityDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Nationality> Update(Nationality entity)
+    public Task<NationalityDto> Update(NationalityDto entity)
     {
         throw new NotImplementedException();
     }

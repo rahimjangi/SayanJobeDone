@@ -16,7 +16,7 @@ public class ServiceReceiverController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<ServiceReceiver>>> GetAll()
+    public async Task<ActionResult<List<ServiceReceiverDto>>> GetAll()
     {
         var result = await _repo.ServiceReceiver.GetAll();
 
@@ -24,7 +24,7 @@ public class ServiceReceiverController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<ServiceReceiver>> Get(int id)
+    public async Task<ActionResult<ServiceReceiverDto>> Get(int id)
     {
         var result = await _repo.ServiceReceiver.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -32,14 +32,14 @@ public class ServiceReceiverController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<ServiceReceiver>> Create(ServiceReceiver obj)
+    public async Task<ActionResult<ServiceReceiverDto>> Create(ServiceReceiverDto obj)
     {
         await _repo.ServiceReceiver.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<ServiceReceiver>> Update(ServiceReceiver obj)
+    public async Task<ActionResult<ServiceReceiverDto>> Update(ServiceReceiverDto obj)
     {
         var updatetObject = await _repo.ServiceReceiver.Update(obj);
         return Ok(updatetObject);

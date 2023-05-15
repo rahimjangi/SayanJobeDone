@@ -15,7 +15,7 @@ public class CountryController : ControllerBase
         _repo = repo;
     }
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Country>>> GetAll()
+    public async Task<ActionResult<List<CountryDto>>> GetAll()
     {
         var result = await _repo.Country.GetAll();
 
@@ -23,7 +23,7 @@ public class CountryController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Country>> Get(int id)
+    public async Task<ActionResult<CountryDto>> Get(int id)
     {
         var result = await _repo.Country.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -31,14 +31,14 @@ public class CountryController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<Country>> Create(Country obj)
+    public async Task<ActionResult<CountryDto>> Create(CountryDto obj)
     {
         await _repo.Country.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Country>> Update(Country obj)
+    public async Task<ActionResult<CountryDto>> Update(CountryDto obj)
     {
         var updatetObject = await _repo.Country.Update(obj);
         return Ok(updatetObject);

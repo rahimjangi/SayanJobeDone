@@ -16,7 +16,7 @@ public class GenderController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Gender>>> GetAll()
+    public async Task<ActionResult<List<GenderDto>>> GetAll()
     {
         var result = await _repo.Gender.GetAll();
 
@@ -24,7 +24,7 @@ public class GenderController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Gender>> Get(int id)
+    public async Task<ActionResult<GenderDto>> Get(int id)
     {
         var result = await _repo.Gender.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -32,14 +32,14 @@ public class GenderController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<Gender>> Create(Gender obj)
+    public async Task<ActionResult<GenderDto>> Create(GenderDto obj)
     {
         await _repo.Gender.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Gender>> Update(Gender obj)
+    public async Task<ActionResult<GenderDto>> Update(GenderDto obj)
     {
         var updatetObject = await _repo.Gender.Update(obj);
         return Ok(updatetObject);

@@ -13,32 +13,32 @@ public class EducationLevelRepository : IEducationLevelRepository
         _db = db;
     }
 
-    public Task Add(EducationLevel entity)
+    public Task Add(EducationLevelDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<EducationLevel>> GetAll(Expression<Func<EducationLevel, bool>>? filter = null, Func<IQueryable<EducationLevel>, IOrderedQueryable<EducationLevel>>? orderby = null, string? includeProperties = null)
+    public Task<List<EducationLevelDto>> GetAll(Expression<Func<EducationLevelDto, bool>>? filter = null, Func<IQueryable<EducationLevelDto>, IOrderedQueryable<EducationLevelDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EducationLevel> GetFirstOrDefault(Expression<Func<EducationLevel, bool>>? filter = null, string? includeProperties = null)
+    public Task<EducationLevelDto> GetFirstOrDefault(Expression<Func<EducationLevelDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(EducationLevel entity)
+    public Task Remove(EducationLevelDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<EducationLevel> entities)
+    public Task RemoveRange(IEnumerable<EducationLevelDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EducationLevel> Update(EducationLevel entity)
+    public Task<EducationLevelDto> Update(EducationLevelDto entity)
     {
         throw new NotImplementedException();
     }

@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class Language
+    public class LanguageDto
     {
         public int Id { get; set; }
 

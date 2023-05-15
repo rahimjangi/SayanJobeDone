@@ -16,7 +16,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Category>>> GetAll()
+    public async Task<ActionResult<List<CategoryDto>>> GetAll()
     {
         var result = await _repo.Category.GetAll();
 
@@ -24,20 +24,20 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Category>> Get(int id)
+    public async Task<ActionResult<CategoryDto>> Get(int id)
     {
         var result = await _repo.Category.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
     }
     [HttpPost("[action]")]
-    public async Task<ActionResult<Category>> Create(Category category)
+    public async Task<ActionResult<CategoryDto>> Create(CategoryDto category)
     {
         await _repo.Category.Add(category);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Category>> Update(Category category)
+    public async Task<ActionResult<CategoryDto>> Update(CategoryDto category)
     {
         var updatetObject = await _repo.Category.Update(category);
         return Ok(updatetObject);

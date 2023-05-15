@@ -13,32 +13,32 @@ public class CategoryRepository : ICategoryRepository
         this._db = db;
     }
 
-    public Task Add(Category entity)
+    public Task Add(CategoryDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Category>> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
+    public Task<List<CategoryDto>> GetAll(Expression<Func<CategoryDto, bool>>? filter = null, Func<IQueryable<CategoryDto>, IOrderedQueryable<CategoryDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Category> GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
+    public Task<CategoryDto> GetFirstOrDefault(Expression<Func<CategoryDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(Category entity)
+    public Task Remove(CategoryDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<Category> entities)
+    public Task RemoveRange(IEnumerable<CategoryDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Category> Update(Category entity)
+    public Task<CategoryDto> Update(CategoryDto entity)
     {
         throw new NotImplementedException();
     }

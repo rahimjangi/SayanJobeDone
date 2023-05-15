@@ -13,32 +13,32 @@ public class EmploymentStatusRepository : IEmploymentStatusRepository
         _db = db;
     }
 
-    public Task Add(EmploymentStatus entity)
+    public Task Add(EmploymentStatusDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<EmploymentStatus>> GetAll(Expression<Func<EmploymentStatus, bool>>? filter = null, Func<IQueryable<EmploymentStatus>, IOrderedQueryable<EmploymentStatus>>? orderby = null, string? includeProperties = null)
+    public Task<List<EmploymentStatusDto>> GetAll(Expression<Func<EmploymentStatusDto, bool>>? filter = null, Func<IQueryable<EmploymentStatusDto>, IOrderedQueryable<EmploymentStatusDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EmploymentStatus> GetFirstOrDefault(Expression<Func<EmploymentStatus, bool>>? filter = null, string? includeProperties = null)
+    public Task<EmploymentStatusDto> GetFirstOrDefault(Expression<Func<EmploymentStatusDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(EmploymentStatus entity)
+    public Task Remove(EmploymentStatusDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<EmploymentStatus> entities)
+    public Task RemoveRange(IEnumerable<EmploymentStatusDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EmploymentStatus> Update(EmploymentStatus entity)
+    public Task<EmploymentStatusDto> Update(EmploymentStatusDto entity)
     {
         throw new NotImplementedException();
     }

@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class LoginModel
+    public class LoginModelDto
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Email is required")]

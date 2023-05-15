@@ -13,32 +13,32 @@ public class PreviousEmploymentRepository : IPreviousEmploymentRepository
         _db = db;
     }
 
-    public Task Add(PreviousEmployment entity)
+    public Task Add(PreviousEmploymentDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<PreviousEmployment>> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
+    public Task<List<PreviousEmploymentDto>> GetAll(Expression<Func<PreviousEmploymentDto, bool>>? filter = null, Func<IQueryable<PreviousEmploymentDto>, IOrderedQueryable<PreviousEmploymentDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<PreviousEmployment> GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
+    public Task<PreviousEmploymentDto> GetFirstOrDefault(Expression<Func<PreviousEmploymentDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(PreviousEmployment entity)
+    public Task Remove(PreviousEmploymentDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<PreviousEmployment> entities)
+    public Task RemoveRange(IEnumerable<PreviousEmploymentDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<PreviousEmployment> Update(PreviousEmployment entity)
+    public Task<PreviousEmploymentDto> Update(PreviousEmploymentDto entity)
     {
         throw new NotImplementedException();
     }

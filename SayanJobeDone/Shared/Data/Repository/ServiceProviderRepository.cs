@@ -13,32 +13,32 @@ public class ServiceProviderRepository : IServiceProviderRepository
         _db = db;
     }
 
-    public Task Add(ServiceProviders entity)
+    public Task Add(ServiceProvidersDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<ServiceProviders>> GetAll(Expression<Func<ServiceProviders, bool>>? filter = null, Func<IQueryable<ServiceProviders>, IOrderedQueryable<ServiceProviders>>? orderby = null, string? includeProperties = null)
+    public Task<List<ServiceProvidersDto>> GetAll(Expression<Func<ServiceProvidersDto, bool>>? filter = null, Func<IQueryable<ServiceProvidersDto>, IOrderedQueryable<ServiceProvidersDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ServiceProviders> GetFirstOrDefault(Expression<Func<ServiceProviders, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceProvidersDto> GetFirstOrDefault(Expression<Func<ServiceProvidersDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(ServiceProviders entity)
+    public Task Remove(ServiceProvidersDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<ServiceProviders> entities)
+    public Task RemoveRange(IEnumerable<ServiceProvidersDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ServiceProviders> Update(ServiceProviders entity)
+    public Task<ServiceProvidersDto> Update(ServiceProvidersDto entity)
     {
         throw new NotImplementedException();
     }

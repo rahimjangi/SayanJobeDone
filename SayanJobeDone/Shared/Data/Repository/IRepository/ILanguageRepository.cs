@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface ILanguageRepository : IRepository<Language>
+public interface ILanguageRepository : IRepository<LanguageDto>
 {
 }

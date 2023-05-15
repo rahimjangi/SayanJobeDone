@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface ICityRepository : IRepository<City>
+public interface ICityRepository : IRepository<CityDto>
 {
 }

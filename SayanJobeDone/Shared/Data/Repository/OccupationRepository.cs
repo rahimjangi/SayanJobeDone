@@ -13,32 +13,32 @@ public class OccupationRepository : IOccupationRepository
         _db = db;
     }
 
-    public Task Add(Occupation entity)
+    public Task Add(OccupationDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Occupation>> GetAll(Expression<Func<Occupation, bool>>? filter = null, Func<IQueryable<Occupation>, IOrderedQueryable<Occupation>>? orderby = null, string? includeProperties = null)
+    public Task<List<OccupationDto>> GetAll(Expression<Func<OccupationDto, bool>>? filter = null, Func<IQueryable<OccupationDto>, IOrderedQueryable<OccupationDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Occupation> GetFirstOrDefault(Expression<Func<Occupation, bool>>? filter = null, string? includeProperties = null)
+    public Task<OccupationDto> GetFirstOrDefault(Expression<Func<OccupationDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(Occupation entity)
+    public Task Remove(OccupationDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<Occupation> entities)
+    public Task RemoveRange(IEnumerable<OccupationDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Occupation> Update(Occupation entity)
+    public Task<OccupationDto> Update(OccupationDto entity)
     {
         throw new NotImplementedException();
     }

@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IGenderRepository : IRepository<Gender>
+public interface IGenderRepository : IRepository<GenderDto>
 {
 }

@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IRateTypeRepository : IRepository<RateType>
+public interface IRateTypeRepository : IRepository<RateTypeDto>
 {
 }

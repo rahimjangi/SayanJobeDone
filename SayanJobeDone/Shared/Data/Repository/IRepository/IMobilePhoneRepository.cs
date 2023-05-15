@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IMobilePhoneRepository : IRepository<MobilePhone>
+public interface IMobilePhoneRepository : IRepository<MobilePhoneDto>
 {
 }

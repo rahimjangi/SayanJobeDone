@@ -16,7 +16,7 @@ public class LocationDataController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<LocationData>>> GetAll()
+    public async Task<ActionResult<List<LocationDataDto>>> GetAll()
     {
         var result = await _repo.LocationData.GetAll();
 
@@ -24,7 +24,7 @@ public class LocationDataController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<LocationData>> Get(int id)
+    public async Task<ActionResult<LocationDataDto>> Get(int id)
     {
         var result = await _repo.LocationData.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -32,14 +32,14 @@ public class LocationDataController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<LocationData>> Create(LocationData obj)
+    public async Task<ActionResult<LocationDataDto>> Create(LocationDataDto obj)
     {
         await _repo.LocationData.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<LocationData>> Update(LocationData obj)
+    public async Task<ActionResult<LocationDataDto>> Update(LocationDataDto obj)
     {
         var updatetObject = await _repo.LocationData.Update(obj);
         return Ok(updatetObject);

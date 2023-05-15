@@ -13,32 +13,32 @@ public class ServiceReceiverRepository : IServiceReceiverRepository
         _db = db;
     }
 
-    public Task Add(ServiceReceiver entity)
+    public Task Add(ServiceReceiverDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<ServiceReceiver>> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
+    public Task<List<ServiceReceiverDto>> GetAll(Expression<Func<ServiceReceiverDto, bool>>? filter = null, Func<IQueryable<ServiceReceiverDto>, IOrderedQueryable<ServiceReceiverDto>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ServiceReceiver> GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceReceiverDto> GetFirstOrDefault(Expression<Func<ServiceReceiverDto, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(ServiceReceiver entity)
+    public Task Remove(ServiceReceiverDto entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<ServiceReceiver> entities)
+    public Task RemoveRange(IEnumerable<ServiceReceiverDto> entities)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ServiceReceiver> Update(ServiceReceiver entity)
+    public Task<ServiceReceiverDto> Update(ServiceReceiverDto entity)
     {
         throw new NotImplementedException();
     }

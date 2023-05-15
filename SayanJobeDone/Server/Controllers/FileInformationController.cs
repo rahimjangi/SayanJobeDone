@@ -16,7 +16,7 @@ public class FileInformationController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<FileInformation>>> GetAll()
+    public async Task<ActionResult<List<FileInformationDto>>> GetAll()
     {
         var result = await _repo.FileInformation.GetAll();
 
@@ -24,7 +24,7 @@ public class FileInformationController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<FileInformation>> Get(int id)
+    public async Task<ActionResult<FileInformationDto>> Get(int id)
     {
         var result = await _repo.FileInformation.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -32,14 +32,14 @@ public class FileInformationController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<FileInformation>> Create(FileInformation obj)
+    public async Task<ActionResult<FileInformationDto>> Create(FileInformationDto obj)
     {
         await _repo.FileInformation.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<FileInformation>> Update(FileInformation obj)
+    public async Task<ActionResult<FileInformationDto>> Update(FileInformationDto obj)
     {
         var updatetObject = await _repo.FileInformation.Update(obj);
         return Ok(updatetObject);

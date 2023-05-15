@@ -16,7 +16,7 @@ public class RateTypeController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<RateType>>> GetAll()
+    public async Task<ActionResult<List<RateTypeDto>>> GetAll()
     {
         var result = await _repo.RateType.GetAll();
 
@@ -24,7 +24,7 @@ public class RateTypeController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<RateType>> Get(int id)
+    public async Task<ActionResult<RateTypeDto>> Get(int id)
     {
         var result = await _repo.RateType.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class RateTypeController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<RateType>> Create(RateType obj)
+    public async Task<ActionResult<RateTypeDto>> Create(RateTypeDto obj)
     {
         await _repo.RateType.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<RateType>> Update(RateType obj)
+    public async Task<ActionResult<RateTypeDto>> Update(RateTypeDto obj)
     {
         var updatetObject = await _repo.RateType.Update(obj);
         return Ok(updatetObject);

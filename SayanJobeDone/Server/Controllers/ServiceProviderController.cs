@@ -16,7 +16,7 @@ public class ServiceProviderController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<ServiceProviders>>> GetAll()
+    public async Task<ActionResult<List<ServiceProvidersDto>>> GetAll()
     {
         var result = await _repo.ServiceProviders.GetAll();
 
@@ -24,7 +24,7 @@ public class ServiceProviderController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<ServiceProviders>> Get(int id)
+    public async Task<ActionResult<ServiceProvidersDto>> Get(int id)
     {
         var result = await _repo.ServiceProviders.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -32,14 +32,14 @@ public class ServiceProviderController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<ServiceProviders>> Create(ServiceProviders obj)
+    public async Task<ActionResult<ServiceProvidersDto>> Create(ServiceProvidersDto obj)
     {
         await _repo.ServiceProviders.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<ServiceProviders>> Update(ServiceProviders obj)
+    public async Task<ActionResult<ServiceProvidersDto>> Update(ServiceProvidersDto obj)
     {
         var updatetObject = await _repo.ServiceProviders.Update(obj);
         return Ok(updatetObject);

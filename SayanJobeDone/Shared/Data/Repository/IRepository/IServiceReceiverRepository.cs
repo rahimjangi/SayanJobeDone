@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IServiceReceiverRepository : IRepository<ServiceReceiver>
+public interface IServiceReceiverRepository : IRepository<ServiceReceiverDto>
 {
 }

@@ -2,14 +2,14 @@
 
 namespace SayanJobeDone.Shared.Models;
 
-public class ServiceRate
+public class ServiceRateDto
 {
     public int ID { get; set; }
     public int ServiceID { get; set; }
     [ForeignKey("ServiceID")]
-    public Service? Service { get; set; }
+    public ServiceDto? Service { get; set; }
     public int RateTypeID { get; set; }
     [ForeignKey("RateTypeID")]
-    public RateType? RateType { get; set; }
+    public RateTypeDto? RateType { get; set; }
     public decimal RateAmount { get; set; }
 }

@@ -16,7 +16,7 @@ public class CityController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<City>>> GetAll()
+    public async Task<ActionResult<List<CityDto>>> GetAll()
     {
         var result = await _repo.City.GetAll();
 
@@ -24,21 +24,21 @@ public class CityController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<City>> Get(int id)
+    public async Task<ActionResult<CityDto>> Get(int id)
     {
-        var result = await _repo.City.GetFirstOrDefault(x => x.Id == id);
+        var result = await _repo.City.GetFirstOrDefault(x => x.Id == id, "Country");
         return Ok(result);
     }
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<City>> Create(City city)
+    public async Task<ActionResult<CityDto>> Create(CityDto city)
     {
         await _repo.City.Add(city);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<City>> Update(City city)
+    public async Task<ActionResult<CityDto>> Update(CityDto city)
     {
         var updatetObject = await _repo.City.Update(city);
         return Ok(updatetObject);

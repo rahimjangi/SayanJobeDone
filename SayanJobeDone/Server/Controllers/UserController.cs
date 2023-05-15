@@ -16,7 +16,7 @@ namespace SayanJobeDone.Server.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<ActionResult<List<User>>> GetAll()
+        public async Task<ActionResult<List<UserDto>>> GetAll()
         {
             var result = await _repo.User.GetAll();
 
@@ -24,7 +24,7 @@ namespace SayanJobeDone.Server.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<ActionResult<User>> Get(int id)
+        public async Task<ActionResult<UserDto>> Get(int id)
         {
             var result = await _repo.User.GetFirstOrDefault(x => x.Id == id);
             return Ok(result);
@@ -34,14 +34,14 @@ namespace SayanJobeDone.Server.Controllers
 
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<User>> Create(User obj)
+        public async Task<ActionResult<UserDto>> Create(UserDto obj)
         {
             await _repo.User.Add(obj);
             return Ok();
         }
 
         [HttpPut("[action]")]
-        public async Task<ActionResult<User>> Update(User obj)
+        public async Task<ActionResult<UserDto>> Update(UserDto obj)
         {
             var updatetObject = await _repo.User.Update(obj);
             return Ok(updatetObject);

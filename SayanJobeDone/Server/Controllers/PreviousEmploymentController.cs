@@ -16,7 +16,7 @@ public class PreviousEmploymentController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<PreviousEmployment>>> GetAll()
+    public async Task<ActionResult<List<PreviousEmploymentDto>>> GetAll()
     {
         var result = await _repo.PreviousEmployment.GetAll();
 
@@ -24,7 +24,7 @@ public class PreviousEmploymentController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<PreviousEmployment>> Get(int id)
+    public async Task<ActionResult<PreviousEmploymentDto>> Get(int id)
     {
         var result = await _repo.PreviousEmployment.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class PreviousEmploymentController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<PreviousEmployment>> Create(PreviousEmployment obj)
+    public async Task<ActionResult<PreviousEmploymentDto>> Create(PreviousEmploymentDto obj)
     {
         await _repo.PreviousEmployment.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<PreviousEmployment>> Update(PreviousEmployment obj)
+    public async Task<ActionResult<PreviousEmploymentDto>> Update(PreviousEmploymentDto obj)
     {
         var updatetObject = await _repo.PreviousEmployment.Update(obj);
         return Ok(updatetObject);

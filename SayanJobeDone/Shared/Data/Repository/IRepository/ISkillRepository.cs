@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface ISkillRepository : IRepository<Skill>
+public interface ISkillRepository : IRepository<SkillDto>
 {
     
 }

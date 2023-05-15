@@ -16,7 +16,7 @@ public class MobilePhoneController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<MobilePhone>>> GetAll()
+    public async Task<ActionResult<List<MobilePhoneDto>>> GetAll()
     {
         var result = await _repo.MobilePhone.GetAll();
 
@@ -24,7 +24,7 @@ public class MobilePhoneController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<MobilePhone>> Get(int id)
+    public async Task<ActionResult<MobilePhoneDto>> Get(int id)
     {
         var result = await _repo.MobilePhone.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class MobilePhoneController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<MobilePhone>> Create(MobilePhone obj)
+    public async Task<ActionResult<MobilePhoneDto>> Create(MobilePhoneDto obj)
     {
         await _repo.MobilePhone.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<MobilePhone>> Update(MobilePhone obj)
+    public async Task<ActionResult<MobilePhoneDto>> Update(MobilePhoneDto obj)
     {
         var updatetObject = await _repo.MobilePhone.Update(obj);
         return Ok(updatetObject);

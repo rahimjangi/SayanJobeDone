@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IFileInformationRepository : IRepository<FileInformation>
+public interface IFileInformationRepository : IRepository<FileInformationDto>
 {
 }

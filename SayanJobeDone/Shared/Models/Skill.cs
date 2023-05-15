@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class Skill
+    public class SkillDto
     {
         public int Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace SayanJobeDone.Shared.Models
 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public Category? Category { get; set; }
+        public CategoryDto? Category { get; set; }
 
         [Range(0, 5, ErrorMessage = "Experience level must be between 0 and 5")]
         public int ExperienceLevel { get; set; }

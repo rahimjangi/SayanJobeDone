@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface ILoginModelRepository : IRepository<LoginModel>
+public interface ILoginModelRepository : IRepository<LoginModelDto>
 {
 }

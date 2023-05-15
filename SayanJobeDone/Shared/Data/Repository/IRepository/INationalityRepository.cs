@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface INationalityRepository : IRepository<Nationality>
+public interface INationalityRepository : IRepository<NationalityDto>
 {
 }

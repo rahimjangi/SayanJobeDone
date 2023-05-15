@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IEducationLevelRepository : IRepository<EducationLevel>
+public interface IEducationLevelRepository : IRepository<EducationLevelDto>
 {
 }

@@ -1,4 +1,5 @@
-﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
+﻿using Microsoft.EntityFrameworkCore;
+using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
@@ -10,36 +11,104 @@ public class AddressRepository : IAddressRepository
 
     public AddressRepository(ApplicationDbContext db)
     {
-        this._db = db;
+        _db = db;
     }
 
-    public Task Add(Address entity)
+    public async Task Add(AddressDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var cityFromDb = await _db.Cities.FirstOrDefaultAsync(x => x.Id == entity.CityId);
+            if (cityFromDb != null)
+            {
+                entity.CityId = cityFromDb.Id;
+                await _db.Addresses.AddAsync(entity);
+                await _db.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("City does not exists!");
+            }
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<List<Address>> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
+    public async Task<List<AddressDto>> GetAll(Expression<Func<AddressDto, bool>>? filter = null, Func<IQueryable<AddressDto>, IOrderedQueryable<AddressDto>>? orderby = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = await _db.Addresses.ToListAsync();
+            return result;
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<Address> GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
+    public async Task<AddressDto> GetFirstOrDefault(Expression<Func<AddressDto, bool>>? filter = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = new AddressDto();
+            if (filter != null)
+            {
+                result = await _db.Addresses.FirstOrDefaultAsync(filter);
+            }
+            return result!;
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task Remove(Address entity)
+    public async Task Remove(AddressDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Addresses.Remove(entity);
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+
+        }
     }
 
-    public Task RemoveRange(IEnumerable<Address> entities)
+    public async Task RemoveRange(IEnumerable<AddressDto> entities)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.RemoveRange(entities);
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<Address> Update(Address entity)
+    public async Task<AddressDto> Update(AddressDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var updatedObj = _db.Addresses.Update(entity);
+            await _db.SaveChangesAsync();
+            return updatedObj.Entity;
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 }

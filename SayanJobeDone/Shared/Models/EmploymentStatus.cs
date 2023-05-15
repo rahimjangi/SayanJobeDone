@@ -1,6 +1,6 @@
 ﻿namespace SayanJobeDone.Shared.Models
 {
-    public class EmploymentStatus
+    public class EmploymentStatusDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

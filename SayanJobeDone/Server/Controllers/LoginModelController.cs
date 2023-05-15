@@ -16,7 +16,7 @@ public class LoginModelController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<LoginModel>>> GetAll()
+    public async Task<ActionResult<List<LoginModelDto>>> GetAll()
     {
         var result = await _repo.LoginModel.GetAll();
 
@@ -24,7 +24,7 @@ public class LoginModelController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<LoginModel>> Get(int id)
+    public async Task<ActionResult<LoginModelDto>> Get(int id)
     {
         var result = await _repo.LoginModel.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class LoginModelController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<LoginModel>> Create(LoginModel obj)
+    public async Task<ActionResult<LoginModelDto>> Create(LoginModelDto obj)
     {
         await _repo.LoginModel.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<LoginModel>> Update(LoginModel obj)
+    public async Task<ActionResult<LoginModelDto>> Update(LoginModelDto obj)
     {
         var updatetObject = await _repo.LoginModel.Update(obj);
         return Ok(updatetObject);

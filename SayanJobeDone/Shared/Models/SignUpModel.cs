@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class SignUpModel
+    public class SignUpModelDto
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Name is required")]

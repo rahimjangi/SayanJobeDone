@@ -16,7 +16,7 @@ public class ServiceController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Service>>> GetAll()
+    public async Task<ActionResult<List<ServiceDto>>> GetAll()
     {
         var result = await _repo.Service.GetAll();
 
@@ -24,21 +24,21 @@ public class ServiceController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Service>> Get(int id)
+    public async Task<ActionResult<ServiceDto>> Get(int id)
     {
         var result = await _repo.Service.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
     }
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<Service>> Create(Service obj)
+    public async Task<ActionResult<ServiceDto>> Create(ServiceDto obj)
     {
         await _repo.Service.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Service>> Update(Service obj)
+    public async Task<ActionResult<ServiceDto>> Update(ServiceDto obj)
     {
         var updatetObject = await _repo.Service.Update(obj);
         return Ok(updatetObject);

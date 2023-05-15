@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class Address
+    public class AddressDto
     {
         public int Id { get; set; }
 
@@ -13,8 +13,12 @@ namespace SayanJobeDone.Shared.Models
         [Required(ErrorMessage = "Postal code is required")]
         public string PostalCode { get; set; } = string.Empty;
 
-        public int CityId { get; set; }
+        public int? CountryId { get; set; }
+        [ForeignKey("CountryId")]
+        public virtual CountryDto? Country { get; set; }
+
+        public int? CityId { get; set; }
         [ForeignKey("CityId")]
-        public City? City { get; set; }
+        public virtual CityDto? City { get; set; }
     }
 }

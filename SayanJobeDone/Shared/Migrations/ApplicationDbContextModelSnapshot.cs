@@ -30,7 +30,10 @@ namespace SayanJobeDone.Shared.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CountryId")
                         .HasColumnType("int");
 
                     b.Property<string>("PostalCode")
@@ -44,6 +47,8 @@ namespace SayanJobeDone.Shared.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Addresses");
                 });
@@ -165,12 +170,12 @@ namespace SayanJobeDone.Shared.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("CityName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CountryId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1246,18 +1251,24 @@ namespace SayanJobeDone.Shared.Migrations
                 {
                     b.HasOne("SayanJobeDone.Shared.Models.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
+
+                    b.HasOne("SayanJobeDone.Shared.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
 
                     b.Navigation("City");
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("SayanJobeDone.Shared.Models.City", b =>
                 {
-                    b.HasOne("SayanJobeDone.Shared.Models.Country", null)
+                    b.HasOne("SayanJobeDone.Shared.Models.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId");
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("SayanJobeDone.Shared.Models.FileInformation", b =>

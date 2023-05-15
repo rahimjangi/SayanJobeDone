@@ -15,7 +15,7 @@ public class EducationLevelController : ControllerBase
         _repo = repo;
     }
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<EducationLevel>>> GetAll()
+    public async Task<ActionResult<List<EducationLevelDto>>> GetAll()
     {
         var result = await _repo.EducationLevel.GetAll();
 
@@ -23,21 +23,21 @@ public class EducationLevelController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<EducationLevel>> Get(int id)
+    public async Task<ActionResult<EducationLevelDto>> Get(int id)
     {
         var result = await _repo.EducationLevel.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
     }
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<EducationLevel>> Create(EducationLevel obj)
+    public async Task<ActionResult<EducationLevelDto>> Create(EducationLevelDto obj)
     {
         await _repo.EducationLevel.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<EducationLevel>> Update(EducationLevel obj)
+    public async Task<ActionResult<EducationLevelDto>> Update(EducationLevelDto obj)
     {
         var updatetObject = await _repo.EducationLevel.Update(obj);
         return Ok(updatetObject);

@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface ILocationDataRepository : IRepository<LocationData>
+public interface ILocationDataRepository : IRepository<LocationDataDto>
 {
 }

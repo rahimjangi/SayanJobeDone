@@ -16,7 +16,7 @@ public class OccupationController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<List<Occupation>>> GetAll()
+    public async Task<ActionResult<List<OccupationDto>>> GetAll()
     {
         var result = await _repo.Occupation.GetAll();
 
@@ -24,7 +24,7 @@ public class OccupationController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<Occupation>> Get(int id)
+    public async Task<ActionResult<OccupationDto>> Get(int id)
     {
         var result = await _repo.Occupation.GetFirstOrDefault(x => x.Id == id);
         return Ok(result);
@@ -33,14 +33,14 @@ public class OccupationController : ControllerBase
 
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<Occupation>> Create(Occupation obj)
+    public async Task<ActionResult<OccupationDto>> Create(OccupationDto obj)
     {
         await _repo.Occupation.Add(obj);
         return Ok();
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult<Occupation>> Update(Occupation obj)
+    public async Task<ActionResult<OccupationDto>> Update(OccupationDto obj)
     {
         var updatetObject = await _repo.Occupation.Update(obj);
         return Ok(updatetObject);

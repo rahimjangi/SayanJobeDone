@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IOccupationRepository : IRepository<Occupation>
+public interface IOccupationRepository : IRepository<OccupationDto>
 {
 }
