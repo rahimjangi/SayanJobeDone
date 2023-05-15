@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class MobilePhoneDto
+    public class MobilePhone
     {
         public int Id { get; set; }
         public string Identifier { get; set; } = string.Empty;
@@ -10,7 +10,7 @@ namespace SayanJobeDone.Shared.Models
         public string OperatingSystem { get; set; } = string.Empty;
         public int UserID { get; set; }
         [ForeignKey("UserID")]
-        public UserDto? User { get; set; }
-        public List<LocationDataDto>? LocationData { get; set; }
+        public User? User { get; set; }
+        public List<LocationData>? LocationData { get; set; }
     }
 }

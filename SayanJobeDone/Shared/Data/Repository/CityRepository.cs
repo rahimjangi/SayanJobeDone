@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
+using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
@@ -8,21 +10,24 @@ namespace SayanJobeDone.Shared.Data.Repository;
 public class CityRepository : ICityRepository
 {
     private readonly ApplicationDbContext _db;
+    private readonly Mapper _mapper;
 
-    public CityRepository(ApplicationDbContext db)
+    public CityRepository(ApplicationDbContext db, Mapper mapper)
     {
         this._db = db;
+        _mapper = mapper;
     }
 
     public async Task Add(CityDto entity)
     {
         try
         {
+            var city = _mapper.Map<CityDto, City>(entity);
             var countryFromDb = await _db.Countries.FirstOrDefaultAsync(x => x.Id == entity.CountryId);
             if (countryFromDb != null)
             {
-                entity.Country = countryFromDb;
-                await _db.Cities.AddAsync(entity);
+                city.Country = countryFromDb;
+                await _db.Cities.AddAsync(city);
                 await _db.SaveChangesAsync();
             }
             else
@@ -42,11 +47,13 @@ public class CityRepository : ICityRepository
         try
         {
 
+
             if (includeProperties != null)
             {
-                return await _db.Cities.Include(includeProperties).ToListAsync();
+                var valueList = await _db.Cities.Include(includeProperties).ToListAsync();
+                return _mapper.Map<List<CityDto>>(valueList);
             }
-            return await _db.Cities.ToListAsync();
+            return _mapper.Map<List<CityDto>>(await _db.Cities.ToListAsync());
         }
         catch (Exception e)
         {

@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class PreviousEmploymentDto
+    public class PreviousEmployment
     {
         public int Id { get; set; }
 

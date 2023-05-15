@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Models;
+using SayanJobeDone.Shared.Dtos;
 
 namespace SayanJobeDone.Server.Controllers;
 
@@ -9,10 +10,12 @@ namespace SayanJobeDone.Server.Controllers;
 public class EmploymentStatusController : ControllerBase
 {
     private readonly IUnitOfWorkRepository _repo;
+    private readonly Mapper _mapper;
 
-    public EmploymentStatusController(IUnitOfWorkRepository repo)
+    public EmploymentStatusController(IUnitOfWorkRepository repo, Mapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
 
     [HttpGet("[action]")]
@@ -26,8 +29,8 @@ public class EmploymentStatusController : ControllerBase
     [HttpGet("[action]")]
     public async Task<ActionResult<EmploymentStatusDto>> Get(int id)
     {
-        var result = await _repo.EmploymentStatus.GetFirstOrDefault(x => x.Id == id);
-        return Ok(result);
+        //var result = await _repo.EmploymentStatus.GetFirstOrDefault(x => x.Id == id);
+        return Ok(null);
     }
 
 
@@ -49,12 +52,12 @@ public class EmploymentStatusController : ControllerBase
     [HttpDelete("[action]")]
     public async Task<ActionResult> Delete(int id)
     {
-        var objectFromDb = await _repo.EmploymentStatus.GetFirstOrDefault(x => x.Id == id);
-        if (objectFromDb != null)
-        {
-            await _repo.EmploymentStatus.Remove(objectFromDb);
+        //var objectFromDb = await _repo.EmploymentStatus.GetFirstOrDefault(x => x.Id == id);
+        //if (objectFromDb != null)
+        //{
+        //    await _repo.EmploymentStatus.Remove(objectFromDb);
 
-        }
+        //}
         return Ok();
     }
 }

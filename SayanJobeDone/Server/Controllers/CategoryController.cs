@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Models;
+using SayanJobeDone.Shared.Dtos;
 
 namespace SayanJobeDone.Server.Controllers;
 
@@ -9,10 +10,12 @@ namespace SayanJobeDone.Server.Controllers;
 public class CategoryController : ControllerBase
 {
     private readonly IUnitOfWorkRepository _repo;
+    private readonly Mapper _mapper;
 
-    public CategoryController(IUnitOfWorkRepository repo)
+    public CategoryController(IUnitOfWorkRepository repo, Mapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
 
     [HttpGet("[action]")]
@@ -26,8 +29,8 @@ public class CategoryController : ControllerBase
     [HttpGet("[action]")]
     public async Task<ActionResult<CategoryDto>> Get(int id)
     {
-        var result = await _repo.Category.GetFirstOrDefault(x => x.Id == id);
-        return Ok(result);
+        //var result = await _repo.Category.GetFirstOrDefault(id);
+        return Ok(null);
     }
     [HttpPost("[action]")]
     public async Task<ActionResult<CategoryDto>> Create(CategoryDto category)
@@ -46,12 +49,12 @@ public class CategoryController : ControllerBase
     [HttpDelete("[action]")]
     public async Task<ActionResult> Delete(int id)
     {
-        var objectFromDb = await _repo.Category.GetFirstOrDefault(x => x.Id == id);
-        if (objectFromDb != null)
-        {
-            await _repo.Category.Remove(objectFromDb);
+        //var objectFromDb = await _repo.Category.GetFirstOrDefault(x => x.Id == id);
+        //if (objectFromDb != null)
+        //{
+        //    await _repo.Category.Remove(objectFromDb);
 
-        }
+        //}
         return Ok();
     }
 

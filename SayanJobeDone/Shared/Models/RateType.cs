@@ -1,6 +1,6 @@
 ﻿namespace SayanJobeDone.Shared.Models
 {
-    public class RateTypeDto
+    public class RateType
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

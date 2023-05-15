@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
+using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
@@ -8,21 +10,24 @@ namespace SayanJobeDone.Shared.Data.Repository;
 public class AddressRepository : IAddressRepository
 {
     private readonly ApplicationDbContext _db;
+    private readonly Mapper _mapper;
 
-    public AddressRepository(ApplicationDbContext db)
+    public AddressRepository(ApplicationDbContext db, Mapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
 
     public async Task Add(AddressDto entity)
     {
         try
         {
+            var address = _mapper.Map<Address>(entity);
             var cityFromDb = await _db.Cities.FirstOrDefaultAsync(x => x.Id == entity.CityId);
             if (cityFromDb != null)
             {
                 entity.CityId = cityFromDb.Id;
-                await _db.Addresses.AddAsync(entity);
+                await _db.Addresses.AddAsync(address);
                 await _db.SaveChangesAsync();
             }
             else
@@ -42,7 +47,7 @@ public class AddressRepository : IAddressRepository
         try
         {
             var result = await _db.Addresses.ToListAsync();
-            return result;
+            return _mapper.Map<List<AddressDto>>(result);
         }
         catch (Exception e)
         {
@@ -53,27 +58,28 @@ public class AddressRepository : IAddressRepository
 
     public async Task<AddressDto> GetFirstOrDefault(Expression<Func<AddressDto, bool>>? filter = null, string? includeProperties = null)
     {
-        try
-        {
-            var result = new AddressDto();
-            if (filter != null)
-            {
-                result = await _db.Addresses.FirstOrDefaultAsync(filter);
-            }
-            return result!;
-        }
-        catch (Exception e)
-        {
+        //try
+        //{
+        //    var result = new AddressDto();
+        //    if (filter != null)
+        //    {
+        //        result = await _db.Addresses.FirstOrDefaultAsync();
+        //    }
+        //    return result!;
+        //}
+        //catch (Exception e)
+        //{
 
-            throw new Exception(e.Message);
-        }
+        //    throw new Exception(e.Message);
+        //}
+        throw new NotImplementedException();
     }
 
     public async Task Remove(AddressDto entity)
     {
         try
         {
-            _db.Addresses.Remove(entity);
+            _db.Addresses.Remove(_mapper.Map<Address>(entity));
             await _db.SaveChangesAsync();
         }
         catch (Exception e)
@@ -101,9 +107,9 @@ public class AddressRepository : IAddressRepository
     {
         try
         {
-            var updatedObj = _db.Addresses.Update(entity);
+            var updatedObj = _db.Addresses.Update(_mapper.Map<Address>(entity));
             await _db.SaveChangesAsync();
-            return updatedObj.Entity;
+            return _mapper.Map<AddressDto>(updatedObj.Entity);
         }
         catch (Exception e)
         {

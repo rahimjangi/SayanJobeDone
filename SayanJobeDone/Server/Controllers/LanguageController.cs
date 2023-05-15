@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Models;
+using SayanJobeDone.Shared.Dtos;
 
 namespace SayanJobeDone.Server.Controllers;
 

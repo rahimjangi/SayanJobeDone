@@ -1,5 +1,5 @@
 ﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
-using SayanJobeDone.Shared.Models;
+using SayanJobeDone.Shared.Dtos;
 using System.Linq.Expressions;
 
 namespace SayanJobeDone.Shared.Data.Repository;

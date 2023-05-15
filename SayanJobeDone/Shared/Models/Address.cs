@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class AddressDto
+    public class Address
     {
         public int Id { get; set; }
 
@@ -15,10 +15,10 @@ namespace SayanJobeDone.Shared.Models
 
         public int? CountryId { get; set; }
         [ForeignKey("CountryId")]
-        public virtual CountryDto? Country { get; set; }
+        public virtual Country? Country { get; set; }
 
         public int? CityId { get; set; }
         [ForeignKey("CityId")]
-        public virtual CityDto? City { get; set; }
+        public virtual City? City { get; set; }
     }
 }

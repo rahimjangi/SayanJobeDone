@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Models;
+using SayanJobeDone.Shared.Dtos;
 
 namespace SayanJobeDone.Server.Controllers;
 
@@ -9,10 +10,12 @@ namespace SayanJobeDone.Server.Controllers;
 public class GenderController : ControllerBase
 {
     private readonly IUnitOfWorkRepository _repo;
+    private readonly Mapper _mapper;
 
-    public GenderController(IUnitOfWorkRepository repo)
+    public GenderController(IUnitOfWorkRepository repo, Mapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
 
     [HttpGet("[action]")]

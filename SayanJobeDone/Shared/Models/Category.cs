@@ -2,7 +2,7 @@
 
 namespace SayanJobeDone.Shared.Models
 {
-    public class CategoryDto
+    public class Category
     {
         public int Id { get; set; }
 
