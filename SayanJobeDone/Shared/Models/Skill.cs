@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SayanJobeDone.Shared.Models
 {
@@ -12,7 +13,7 @@ namespace SayanJobeDone.Shared.Models
         public string Description { get; set; } = string.Empty;
 
         public int CategoryId { get; set; }
-
+        [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
 
         [Range(0, 5, ErrorMessage = "Experience level must be between 0 and 5")]
@@ -26,6 +27,5 @@ namespace SayanJobeDone.Shared.Models
         [DataType(DataType.Date)]
         public DateTime LastUpdatedDate { get; set; }
 
-        public List<User> Users { get; set; } = new List<User>();
     }
 }

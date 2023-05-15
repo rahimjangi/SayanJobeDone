@@ -4,11 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int ServiceProviderId { get; set; }
-        public ServiceProvider? ServiceProvider { get; set; }
-        public int ServiceReceiverId { get; set; }
-        public ServiceReceiver? ServiceReceiver { get; set; }
-        // Additional service-related properties
+
     }
 }
 //Cleaning: This includes tasks such as house cleaning, apartment cleaning, deep cleaning, or specific cleaning tasks like carpet cleaning or window cleaning.

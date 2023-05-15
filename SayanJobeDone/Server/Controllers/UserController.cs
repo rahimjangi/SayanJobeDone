@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SayanJobeDone.Shared.Data;
 
 namespace SayanJobeDone.Server.Controllers
 {
@@ -6,6 +7,18 @@ namespace SayanJobeDone.Server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUnitOfWorkRepository _repo;
 
+        public UserController(IUnitOfWorkRepository repo)
+        {
+            _repo = repo;
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult GetAll()
+        {
+
+            return Ok();
+        }
     }
 }

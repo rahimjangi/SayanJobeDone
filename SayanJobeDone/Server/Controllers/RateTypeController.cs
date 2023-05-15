@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SayanJobeDone.Shared.Data;
 
 namespace SayanJobeDone.Server.Controllers;
 
@@ -6,5 +7,10 @@ namespace SayanJobeDone.Server.Controllers;
 [ApiController]
 public class RateTypeController : ControllerBase
 {
+    private readonly IUnitOfWorkRepository _repo;
 
+    public RateTypeController(IUnitOfWorkRepository repo)
+    {
+        _repo = repo;
+    }
 }

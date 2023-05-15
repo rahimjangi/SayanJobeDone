@@ -43,7 +43,7 @@
             <ValidationMessage For="@(() => fileInformation.Address.Street)" />
         </div>*@
 
-        <div class="form-group">
+  @*      <div class="form-group">
             <label for="City">City</label>
             <InputSelect id="City" class="form-control" @bind-Value="fileInformation.City">
                 <option value="">-- Select City --</option>
@@ -53,9 +53,9 @@
                 }
             </InputSelect>
             <ValidationMessage For="@(() => fileInformation.City)" />
-        </div>
+        </div>*@
 
-        <div class="form-group">
+@*        <div class="form-group">
             <label for="Country">Country</label>
             <InputSelect id="Country" class="form-control" @bind-Value="fileInformation.Country">
                 <option value="">-- Select Country --</option>
@@ -65,13 +65,13 @@
                 }
             </InputSelect>
             <ValidationMessage For="@(() => fileInformation.Country)" />
-        </div>
+        </div>*@
 
-        <div class="form-group">
+@*        <div class="form-group">
             <label for="AdditionalInfo">Additional Information</label>
             <InputText id="AdditionalInfo" class="form-control" @bind-Value="fileInformation.AdditionalInfo" />
             <ValidationMessage For="@(() => fileInformation.AdditionalInfo)" />
-        </div>
+        </div>*@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>

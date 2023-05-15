@@ -4,6 +4,7 @@ namespace SayanJobeDone.Shared.Models
 {
     public class SignUpModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; } = string.Empty;
 
@@ -30,16 +31,16 @@ namespace SayanJobeDone.Shared.Models
         [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "City is required")]
-        public City? City { get; set; }
+        //[Required(ErrorMessage = "City is required")]
+        //public City? City { get; set; }
 
         [Required(ErrorMessage = "Postal code is required")]
         [RegularExpression(@"^\d{5}(?:[-\s]\d{4})?$", ErrorMessage = "Invalid postal code")]
         public string PostalCode { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Country is required")]
-        public Country? Country { get; set; }
+        //[Required(ErrorMessage = "Country is required")]
+        //public Country? Country { get; set; }
 
-        public List<Skill> Skills { get; set; } = new List<Skill>();
+        //public List<Skill> Skills { get; set; } = new List<Skill>();
     }
 }

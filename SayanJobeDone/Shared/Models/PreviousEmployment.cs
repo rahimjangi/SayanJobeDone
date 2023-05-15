@@ -20,6 +20,5 @@ namespace SayanJobeDone.Shared.Models
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
-        // Other employment properties
     }
 }

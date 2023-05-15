@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SayanJobeDone.Shared.Data;
 
 namespace SayanJobeDone.Server.Controllers
 {
@@ -6,6 +7,11 @@ namespace SayanJobeDone.Server.Controllers
     [ApiController]
     public class SkillController : ControllerBase
     {
+        private readonly IUnitOfWorkRepository _repo;
 
+        public SkillController(IUnitOfWorkRepository repo)
+        {
+            _repo = repo;
+        }
     }
 }

@@ -2,6 +2,6 @@
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IServiceProviderRepository : IRepository<ServiceProvider>
+public interface IServiceProviderRepository : IRepository<ServiceProviderRepository>
 {
 }

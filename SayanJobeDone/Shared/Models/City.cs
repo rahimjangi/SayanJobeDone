@@ -9,9 +9,6 @@ namespace SayanJobeDone.Shared.Models
         [Required(ErrorMessage = "City name is required")]
         public string Name { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Country is required")]
-        public int CountryId { get; set; }
 
-        public Country? Country { get; set; }
     }
 }

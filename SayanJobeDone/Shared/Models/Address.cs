@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SayanJobeDone.Shared.Models
 {
@@ -13,6 +14,7 @@ namespace SayanJobeDone.Shared.Models
         public string PostalCode { get; set; } = string.Empty;
 
         public int CityId { get; set; }
+        [ForeignKey("CityId")]
         public City? City { get; set; }
     }
 }
