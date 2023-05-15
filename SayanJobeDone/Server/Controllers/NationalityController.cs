@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SayanJobeDone.Shared.Data;
+using SayanJobeDone.Shared.Models;
 
 namespace SayanJobeDone.Server.Controllers;
 
@@ -12,5 +13,48 @@ public class NationalityController : ControllerBase
     public NationalityController(IUnitOfWorkRepository repo)
     {
         _repo = repo;
+    }
+
+    [HttpGet("[action]")]
+    public async Task<ActionResult<List<Nationality>>> GetAll()
+    {
+        var result = await _repo.Nationality.GetAll();
+
+        return Ok(result);
+    }
+
+    [HttpGet("[action]")]
+    public async Task<ActionResult<Nationality>> Get(int id)
+    {
+        var result = await _repo.Nationality.GetFirstOrDefault(x => x.Id == id);
+        return Ok(result);
+    }
+
+
+
+    [HttpPost("[action]")]
+    public async Task<ActionResult<Nationality>> Create(Nationality obj)
+    {
+        await _repo.Nationality.Add(obj);
+        return Ok();
+    }
+
+    [HttpPut("[action]")]
+    public async Task<ActionResult<Nationality>> Update(Nationality obj)
+    {
+        var updatetObject = await _repo.Nationality.Update(obj);
+        return Ok(updatetObject);
+    }
+
+    [HttpDelete("[action]")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var objectFromDb = await _repo.Nationality.GetFirstOrDefault(x => x.Id == id);
+        if (objectFromDb != null)
+        {
+            await _repo.Nationality.Remove(objectFromDb);
+
+        }
+        return Ok();
     }
 }

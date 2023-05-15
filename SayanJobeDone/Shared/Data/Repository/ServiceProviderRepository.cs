@@ -1,4 +1,5 @@
 ﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
+using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
 namespace SayanJobeDone.Shared.Data.Repository;
@@ -12,28 +13,32 @@ public class ServiceProviderRepository : IServiceProviderRepository
         _db = db;
     }
 
-    public void Add(ServiceProviderRepository entity)
+    public Task Add(ServiceProviders entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<ServiceProviderRepository> GetAll(Expression<Func<ServiceProviderRepository, bool>>? filter = null, Func<IQueryable<ServiceProviderRepository>, IOrderedQueryable<ServiceProviderRepository>>? orderby = null, string? includeProperties = null)
+    public Task<List<ServiceProviders>> GetAll(Expression<Func<ServiceProviders, bool>>? filter = null, Func<IQueryable<ServiceProviders>, IOrderedQueryable<ServiceProviders>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public ServiceProviderRepository GetFirstOrDefault(Expression<Func<ServiceProviderRepository, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceProviders> GetFirstOrDefault(Expression<Func<ServiceProviders, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-
-    public void Remove(ServiceProviderRepository entity)
+    public Task Remove(ServiceProviders entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<ServiceProviderRepository> entities)
+    public Task RemoveRange(IEnumerable<ServiceProviders> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ServiceProviders> Update(ServiceProviders entity)
     {
         throw new NotImplementedException();
     }

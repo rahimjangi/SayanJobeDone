@@ -13,27 +13,32 @@ public class RateTypeRepository : IRateTypeRepository
         _db = db;
     }
 
-    public void Add(RateType entity)
+    public Task Add(RateType entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<RateType> GetAll(Expression<Func<RateType, bool>>? filter = null, Func<IQueryable<RateType>, IOrderedQueryable<RateType>>? orderby = null, string? includeProperties = null)
+    public Task<List<RateType>> GetAll(Expression<Func<RateType, bool>>? filter = null, Func<IQueryable<RateType>, IOrderedQueryable<RateType>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public RateType GetFirstOrDefault(Expression<Func<RateType, bool>>? filter = null, string? includeProperties = null)
+    public Task<RateType> GetFirstOrDefault(Expression<Func<RateType, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(RateType entity)
+    public Task Remove(RateType entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<RateType> entities)
+    public Task RemoveRange(IEnumerable<RateType> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<RateType> Update(RateType entity)
     {
         throw new NotImplementedException();
     }

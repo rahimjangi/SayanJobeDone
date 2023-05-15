@@ -22,7 +22,7 @@ namespace SayanJobeDone.Shared.Data
         public DbSet<PreviousEmployment> PreviousEmployments { get; set; } = null!;
         public DbSet<RateType> RateTypes { get; set; } = null!;
         public DbSet<Service> Services { get; set; } = null!;
-        public DbSet<ServiceProvider> ServiceProviders { get; set; } = null!;
+        public DbSet<ServiceProviders> ServiceProviders { get; set; } = null!;
         public DbSet<ServiceReceiver> ServiceReceivers { get; set; } = null!;
         public DbSet<SignUpModel> SignUpModel { get; set; } = null!;
         public DbSet<Skill> Skills { get; set; } = null!;

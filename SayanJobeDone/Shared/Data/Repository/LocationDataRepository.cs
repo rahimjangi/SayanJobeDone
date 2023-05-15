@@ -13,27 +13,32 @@ public class LocationDataRepository : ILocationDataRepository
         _db = db;
     }
 
-    public void Add(LocationData entity)
+    public Task Add(LocationData entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<LocationData> GetAll(Expression<Func<LocationData, bool>>? filter = null, Func<IQueryable<LocationData>, IOrderedQueryable<LocationData>>? orderby = null, string? includeProperties = null)
+    public Task<List<LocationData>> GetAll(Expression<Func<LocationData, bool>>? filter = null, Func<IQueryable<LocationData>, IOrderedQueryable<LocationData>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public LocationData GetFirstOrDefault(Expression<Func<LocationData, bool>>? filter = null, string? includeProperties = null)
+    public Task<LocationData> GetFirstOrDefault(Expression<Func<LocationData, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(LocationData entity)
+    public Task Remove(LocationData entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<LocationData> entities)
+    public Task RemoveRange(IEnumerable<LocationData> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<LocationData> Update(LocationData entity)
     {
         throw new NotImplementedException();
     }

@@ -13,27 +13,32 @@ public class UserRepository : IUserRepository
         _db = db;
     }
 
-    public void Add(User entity)
+    public Task Add(User entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<User> GetAll(Expression<Func<User, bool>>? filter = null, Func<IQueryable<User>, IOrderedQueryable<User>>? orderby = null, string? includeProperties = null)
+    public Task<List<User>> GetAll(Expression<Func<User, bool>>? filter = null, Func<IQueryable<User>, IOrderedQueryable<User>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public User GetFirstOrDefault(Expression<Func<User, bool>>? filter = null, string? includeProperties = null)
+    public Task<User> GetFirstOrDefault(Expression<Func<User, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(User entity)
+    public Task Remove(User entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<User> entities)
+    public Task RemoveRange(IEnumerable<User> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> Update(User entity)
     {
         throw new NotImplementedException();
     }

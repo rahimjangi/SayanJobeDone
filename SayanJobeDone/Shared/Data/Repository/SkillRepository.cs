@@ -13,27 +13,32 @@ public class SkillRepository : ISkillRepository
         _db = db;
     }
 
-    public void Add(Skill entity)
+    public Task Add(Skill entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Skill> GetAll(Expression<Func<Skill, bool>>? filter = null, Func<IQueryable<Skill>, IOrderedQueryable<Skill>>? orderby = null, string? includeProperties = null)
+    public Task<List<Skill>> GetAll(Expression<Func<Skill, bool>>? filter = null, Func<IQueryable<Skill>, IOrderedQueryable<Skill>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Skill GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
+    public Task<Skill> GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(Skill entity)
+    public Task Remove(Skill entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<Skill> entities)
+    public Task RemoveRange(IEnumerable<Skill> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Skill> Update(Skill entity)
     {
         throw new NotImplementedException();
     }

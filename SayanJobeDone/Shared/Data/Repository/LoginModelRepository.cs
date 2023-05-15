@@ -13,27 +13,32 @@ public class LoginModelRepository : ILoginModelRepository
         _db = db;
     }
 
-    public void Add(LoginModel entity)
+    public Task Add(LoginModel entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<LoginModel> GetAll(Expression<Func<LoginModel, bool>>? filter = null, Func<IQueryable<LoginModel>, IOrderedQueryable<LoginModel>>? orderby = null, string? includeProperties = null)
+    public Task<List<LoginModel>> GetAll(Expression<Func<LoginModel, bool>>? filter = null, Func<IQueryable<LoginModel>, IOrderedQueryable<LoginModel>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public LoginModel GetFirstOrDefault(Expression<Func<LoginModel, bool>>? filter = null, string? includeProperties = null)
+    public Task<LoginModel> GetFirstOrDefault(Expression<Func<LoginModel, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(LoginModel entity)
+    public Task Remove(LoginModel entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<LoginModel> entities)
+    public Task RemoveRange(IEnumerable<LoginModel> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<LoginModel> Update(LoginModel entity)
     {
         throw new NotImplementedException();
     }

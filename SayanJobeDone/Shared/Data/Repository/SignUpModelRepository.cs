@@ -13,27 +13,32 @@ public class SignUpModelRepository : ISignUpModelRepository
         _db = db;
     }
 
-    public void Add(SignUpModel entity)
+    public Task Add(SignUpModel entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<SignUpModel> GetAll(Expression<Func<SignUpModel, bool>>? filter = null, Func<IQueryable<SignUpModel>, IOrderedQueryable<SignUpModel>>? orderby = null, string? includeProperties = null)
+    public Task<List<SignUpModel>> GetAll(Expression<Func<SignUpModel, bool>>? filter = null, Func<IQueryable<SignUpModel>, IOrderedQueryable<SignUpModel>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public SignUpModel GetFirstOrDefault(Expression<Func<SignUpModel, bool>>? filter = null, string? includeProperties = null)
+    public Task<SignUpModel> GetFirstOrDefault(Expression<Func<SignUpModel, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(SignUpModel entity)
+    public Task Remove(SignUpModel entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<SignUpModel> entities)
+    public Task RemoveRange(IEnumerable<SignUpModel> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<SignUpModel> Update(SignUpModel entity)
     {
         throw new NotImplementedException();
     }

@@ -13,27 +13,32 @@ public class EducationLevelRepository : IEducationLevelRepository
         _db = db;
     }
 
-    public void Add(EducationLevel entity)
+    public Task Add(EducationLevel entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<EducationLevel> GetAll(Expression<Func<EducationLevel, bool>>? filter = null, Func<IQueryable<EducationLevel>, IOrderedQueryable<EducationLevel>>? orderby = null, string? includeProperties = null)
+    public Task<List<EducationLevel>> GetAll(Expression<Func<EducationLevel, bool>>? filter = null, Func<IQueryable<EducationLevel>, IOrderedQueryable<EducationLevel>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public EducationLevel GetFirstOrDefault(Expression<Func<EducationLevel, bool>>? filter = null, string? includeProperties = null)
+    public Task<EducationLevel> GetFirstOrDefault(Expression<Func<EducationLevel, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(EducationLevel entity)
+    public Task Remove(EducationLevel entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<EducationLevel> entities)
+    public Task RemoveRange(IEnumerable<EducationLevel> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<EducationLevel> Update(EducationLevel entity)
     {
         throw new NotImplementedException();
     }

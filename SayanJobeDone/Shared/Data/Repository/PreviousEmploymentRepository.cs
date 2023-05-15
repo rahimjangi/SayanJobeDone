@@ -13,27 +13,32 @@ public class PreviousEmploymentRepository : IPreviousEmploymentRepository
         _db = db;
     }
 
-    public void Add(PreviousEmployment entity)
+    public Task Add(PreviousEmployment entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<PreviousEmployment> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
+    public Task<List<PreviousEmployment>> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public PreviousEmployment GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
+    public Task<PreviousEmployment> GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(PreviousEmployment entity)
+    public Task Remove(PreviousEmployment entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<PreviousEmployment> entities)
+    public Task RemoveRange(IEnumerable<PreviousEmployment> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<PreviousEmployment> Update(PreviousEmployment entity)
     {
         throw new NotImplementedException();
     }

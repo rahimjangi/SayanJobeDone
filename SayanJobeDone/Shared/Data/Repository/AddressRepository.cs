@@ -13,28 +13,32 @@ public class AddressRepository : IAddressRepository
         this._db = db;
     }
 
-
-    public void Add(Address entity)
+    public Task Add(Address entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Address> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
+    public Task<List<Address>> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Address GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
+    public Task<Address> GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(Address entity)
+    public Task Remove(Address entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<Address> entities)
+    public Task RemoveRange(IEnumerable<Address> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Address> Update(Address entity)
     {
         throw new NotImplementedException();
     }

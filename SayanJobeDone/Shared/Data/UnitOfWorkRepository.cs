@@ -22,12 +22,13 @@ public class UnitOfWorkRepository : IUnitOfWorkRepository
     public IOccupationRepository Occupation { get; }
     public IPreviousEmploymentRepository PreviousEmployment { get; }
     public IRateTypeRepository RateType { get; }
-    public IServiceProviderRepository ServiceProvider { get; }
+    public IServiceProviderRepository ServiceProviders { get; }
     public IServiceReceiverRepository ServiceReceiver { get; }
     public IServiceRepository Service { get; }
     public ISignUpModelRepository SignUpModel { get; }
     public ISkillRepository Skill { get; }
     public IUserRepository User { get; }
+
 
     public UnitOfWorkRepository(ApplicationDbContext db)
     {
@@ -48,7 +49,7 @@ public class UnitOfWorkRepository : IUnitOfWorkRepository
         Occupation = new OccupationRepository(_db);
         PreviousEmployment = new PreviousEmploymentRepository(_db);
         RateType = new RateTypeRepository(_db);
-        ServiceProvider = new ServiceProviderRepository(_db);
+        ServiceProviders = new ServiceProviderRepository(_db);
         ServiceReceiver = new ServiceReceiverRepository(_db);
         Service = new ServiceRepository(_db);
         SignUpModel = new SignUpModelRepository(_db);

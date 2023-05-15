@@ -13,27 +13,32 @@ public class MobilePhoneRepository : IMobilePhoneRepository
         _db = db;
     }
 
-    public void Add(MobilePhone entity)
+    public Task Add(MobilePhone entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<MobilePhone> GetAll(Expression<Func<MobilePhone, bool>>? filter = null, Func<IQueryable<MobilePhone>, IOrderedQueryable<MobilePhone>>? orderby = null, string? includeProperties = null)
+    public Task<List<MobilePhone>> GetAll(Expression<Func<MobilePhone, bool>>? filter = null, Func<IQueryable<MobilePhone>, IOrderedQueryable<MobilePhone>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public MobilePhone GetFirstOrDefault(Expression<Func<MobilePhone, bool>>? filter = null, string? includeProperties = null)
+    public Task<MobilePhone> GetFirstOrDefault(Expression<Func<MobilePhone, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(MobilePhone entity)
+    public Task Remove(MobilePhone entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<MobilePhone> entities)
+    public Task RemoveRange(IEnumerable<MobilePhone> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<MobilePhone> Update(MobilePhone entity)
     {
         throw new NotImplementedException();
     }

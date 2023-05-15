@@ -13,27 +13,32 @@ public class GenderRepository : IGenderRepository
         _db = db;
     }
 
-    public void Add(Gender entity)
+    public Task Add(Gender entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Gender> GetAll(Expression<Func<Gender, bool>>? filter = null, Func<IQueryable<Gender>, IOrderedQueryable<Gender>>? orderby = null, string? includeProperties = null)
+    public Task<List<Gender>> GetAll(Expression<Func<Gender, bool>>? filter = null, Func<IQueryable<Gender>, IOrderedQueryable<Gender>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Gender GetFirstOrDefault(Expression<Func<Gender, bool>>? filter = null, string? includeProperties = null)
+    public Task<Gender> GetFirstOrDefault(Expression<Func<Gender, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(Gender entity)
+    public Task Remove(Gender entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<Gender> entities)
+    public Task RemoveRange(IEnumerable<Gender> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Gender> Update(Gender entity)
     {
         throw new NotImplementedException();
     }

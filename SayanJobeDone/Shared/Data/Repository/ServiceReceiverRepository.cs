@@ -13,27 +13,32 @@ public class ServiceReceiverRepository : IServiceReceiverRepository
         _db = db;
     }
 
-    public void Add(ServiceReceiver entity)
+    public Task Add(ServiceReceiver entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<ServiceReceiver> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
+    public Task<List<ServiceReceiver>> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public ServiceReceiver GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceReceiver> GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(ServiceReceiver entity)
+    public Task Remove(ServiceReceiver entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<ServiceReceiver> entities)
+    public Task RemoveRange(IEnumerable<ServiceReceiver> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ServiceReceiver> Update(ServiceReceiver entity)
     {
         throw new NotImplementedException();
     }

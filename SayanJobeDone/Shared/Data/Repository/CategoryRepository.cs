@@ -12,27 +12,33 @@ public class CategoryRepository : ICategoryRepository
     {
         this._db = db;
     }
-    public void Add(Category entity)
+
+    public Task Add(Category entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Category> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
+    public Task<List<Category>> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Category GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
+    public Task<Category> GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(Category entity)
+    public Task Remove(Category entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<Category> entities)
+    public Task RemoveRange(IEnumerable<Category> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Category> Update(Category entity)
     {
         throw new NotImplementedException();
     }

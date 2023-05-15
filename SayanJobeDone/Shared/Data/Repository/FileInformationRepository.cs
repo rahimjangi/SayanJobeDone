@@ -13,27 +13,32 @@ public class FileInformationRepository : IFileInformationRepository
         _db = db;
     }
 
-    public void Add(FileInformation entity)
+    public Task Add(FileInformation entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<FileInformation> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
+    public Task<List<FileInformation>> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public FileInformation GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
+    public Task<FileInformation> GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(FileInformation entity)
+    public Task Remove(FileInformation entity)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveRange(IEnumerable<FileInformation> entities)
+    public Task RemoveRange(IEnumerable<FileInformation> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FileInformation> Update(FileInformation entity)
     {
         throw new NotImplementedException();
     }
