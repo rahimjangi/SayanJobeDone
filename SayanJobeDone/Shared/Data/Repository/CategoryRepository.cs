@@ -1,4 +1,6 @@
-﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
@@ -8,39 +10,95 @@ namespace SayanJobeDone.Shared.Data.Repository;
 public class CategoryRepository : ICategoryRepository
 {
     private readonly ApplicationDbContext _db;
+    private readonly Mapper _mapper;
 
-    public CategoryRepository(ApplicationDbContext db)
+    public CategoryRepository(ApplicationDbContext db, Mapper mapper)
     {
         this._db = db;
+        _mapper = mapper;
     }
 
-    public Task Add(CategoryDto entity)
+    public async Task Add(CategoryDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var category = _mapper.Map<Category>(entity);
+            _db.Categories.Add(category);
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<List<CategoryDto>> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
+    public async Task<List<CategoryDto>> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _mapper.Map<List<CategoryDto>>(await _db.Categories.ToListAsync());
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<CategoryDto> GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
+    public async Task<CategoryDto> GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _mapper.Map<CategoryDto>(await _db.Categories.FirstOrDefaultAsync(filter!));
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task Remove(CategoryDto entity)
+    public async Task Remove(CategoryDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Categories.Remove(_mapper.Map<Category>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task RemoveRange(IEnumerable<CategoryDto> entities)
+    public async Task RemoveRange(IEnumerable<CategoryDto> entities)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Categories.RemoveRange(_mapper.Map<Category>(entities));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<CategoryDto> Update(CategoryDto entity)
+    public async Task<CategoryDto> Update(CategoryDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = _mapper.Map<CategoryDto>(_db.Categories.Update(_mapper.Map<Category>(entity)));
+            await _db.SaveChangesAsync();
+            return result;
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 }

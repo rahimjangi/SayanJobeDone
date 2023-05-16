@@ -1,4 +1,6 @@
-﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
@@ -8,39 +10,94 @@ namespace SayanJobeDone.Shared.Data.Repository;
 public class LanguageRepository : ILanguageRepository
 {
     private readonly ApplicationDbContext _db;
+    private readonly Mapper _mapper;
 
-    public LanguageRepository(ApplicationDbContext db)
+    public LanguageRepository(ApplicationDbContext db, Mapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
 
-    public Task Add(LanguageDto entity)
+    public async Task Add(LanguageDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _db.Languages.AddAsync(_mapper.Map<Language>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<List<LanguageDto>> GetAll(Expression<Func<Language, bool>>? filter = null, Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderby = null, string? includeProperties = null)
+    public async Task<List<LanguageDto>> GetAll(Expression<Func<Language, bool>>? filter = null, Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderby = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _mapper.Map<List<LanguageDto>>(await _db.Languages.ToListAsync());
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<LanguageDto> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
+    public async Task<LanguageDto> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _mapper.Map<LanguageDto>(await _db.Languages.FirstOrDefaultAsync(filter!));
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task Remove(LanguageDto entity)
+    public async Task Remove(LanguageDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Languages.Remove(_mapper.Map<Language>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task RemoveRange(IEnumerable<LanguageDto> entities)
+    public async Task RemoveRange(IEnumerable<LanguageDto> entities)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Languages.RemoveRange(_mapper.Map<IEnumerable<Language>>(entities));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<LanguageDto> Update(LanguageDto entity)
+    public async Task<LanguageDto> Update(LanguageDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = _db.Languages.Update(_mapper.Map<Language>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<LanguageDto>(result);
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 }

@@ -28,7 +28,7 @@ public class EducationLevelController : ControllerBase
     [HttpGet("[action]")]
     public async Task<ActionResult<EducationLevelDto>> Get(int id)
     {
-        //var result = await _repo.EducationLevel.GetFirstOrDefault(x => x.Id == id);
+        var result = await _repo.EducationLevel.GetFirstOrDefault(x => x.Id == id);
         return Ok(null);
     }
 
@@ -49,12 +49,12 @@ public class EducationLevelController : ControllerBase
     [HttpDelete("[action]")]
     public async Task<ActionResult> Delete(int id)
     {
-        //var objectFromDb = await _repo.EducationLevel.GetFirstOrDefault(x => x.Id == id);
-        //if (objectFromDb != null)
-        //{
-        //    await _repo.EducationLevel.Remove(objectFromDb);
+        var objectFromDb = await _repo.EducationLevel.GetFirstOrDefault(x => x.Id == id);
+        if (objectFromDb != null)
+        {
+            await _repo.EducationLevel.Remove(objectFromDb);
 
-        //}
+        }
         return Ok();
     }
 }

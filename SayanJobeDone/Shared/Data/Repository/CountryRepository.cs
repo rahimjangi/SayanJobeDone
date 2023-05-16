@@ -17,9 +17,18 @@ public class CountryRepository : ICountryRepository
         _mapper = mapper;
     }
 
-    public Task Add(CountryDto entity)
+    public async Task Add(CountryDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Countries.Add(_mapper.Map<Country>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
     public async Task<List<CountryDto>> GetAll(Expression<Func<Country, bool>>? filter = null, Func<IQueryable<Country>, IOrderedQueryable<Country>>? orderby = null, string? includeProperties = null)
@@ -50,7 +59,7 @@ public class CountryRepository : ICountryRepository
 
         try
         {
-            var countryFromDb = await _db.Countries.FirstOrDefaultAsync(filter);
+            var countryFromDb = await _db.Countries.FirstOrDefaultAsync(filter!);
             return _mapper.Map<CountryDto>(countryFromDb);
         }
         catch (Exception e)
@@ -60,18 +69,47 @@ public class CountryRepository : ICountryRepository
         }
     }
 
-    public Task Remove(CountryDto entity)
+    public async Task Remove(CountryDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Countries.Remove(_mapper.Map<Country>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task RemoveRange(IEnumerable<CountryDto> entities)
+    public async Task RemoveRange(IEnumerable<CountryDto> entities)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.Countries.RemoveRange(_mapper.Map<IEnumerable<Country>>(entities));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<CountryDto> Update(CountryDto entity)
+    public async Task<CountryDto> Update(CountryDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = _db.Countries.Update(_mapper.Map<Country>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<CountryDto>(result);
+
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 }

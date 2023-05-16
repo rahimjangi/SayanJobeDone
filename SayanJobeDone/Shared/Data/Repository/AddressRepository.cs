@@ -58,21 +58,21 @@ public class AddressRepository : IAddressRepository
 
     public async Task<AddressDto> GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
     {
-        //try
-        //{
-        //    var result = new AddressDto();
-        //    if (filter != null)
-        //    {
-        //        result = await _db.Addresses.FirstOrDefaultAsync();
-        //    }
-        //    return result!;
-        //}
-        //catch (Exception e)
-        //{
+        try
+        {
+            var result = new AddressDto();
+            if (filter != null)
+            {
+                result = _mapper.Map<AddressDto>(await _db.Addresses.FirstOrDefaultAsync(filter));
+            }
+            return result!;
+        }
+        catch (Exception e)
+        {
 
-        //    throw new Exception(e.Message);
-        //}
-        throw new NotImplementedException();
+            throw new Exception(e.Message);
+        }
+
     }
 
     public async Task Remove(AddressDto entity)

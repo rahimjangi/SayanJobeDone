@@ -1,4 +1,6 @@
-﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
@@ -8,39 +10,94 @@ namespace SayanJobeDone.Shared.Data.Repository;
 public class FileInformationRepository : IFileInformationRepository
 {
     private readonly ApplicationDbContext _db;
+    private readonly Mapper _mapper;
 
-    public FileInformationRepository(ApplicationDbContext db)
+    public FileInformationRepository(ApplicationDbContext db, Mapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
 
-    public Task Add(FileInformationDto entity)
+    public async Task Add(FileInformationDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _db.FileInformation.AddAsync(_mapper.Map<FileInformation>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<List<FileInformationDto>> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
+    public async Task<List<FileInformationDto>> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _mapper.Map<List<FileInformationDto>>(await _db.FileInformation.ToListAsync());
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<FileInformationDto> GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
+    public async Task<FileInformationDto> GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _mapper.Map<FileInformationDto>(await _db.FileInformation.FirstOrDefaultAsync(filter!));
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task Remove(FileInformationDto entity)
+    public async Task Remove(FileInformationDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.FileInformation.Remove(_mapper.Map<FileInformation>(entity));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task RemoveRange(IEnumerable<FileInformationDto> entities)
+    public async Task RemoveRange(IEnumerable<FileInformationDto> entities)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _db.FileInformation.RemoveRange(_mapper.Map<IEnumerable<FileInformation>>(entities));
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 
-    public Task<FileInformationDto> Update(FileInformationDto entity)
+    public async Task<FileInformationDto> Update(FileInformationDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = _db.FileInformation.Update(_mapper.Map<FileInformation>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<FileInformationDto>(result);
+        }
+        catch (Exception e)
+        {
+
+            throw new Exception(e.Message);
+        }
     }
 }

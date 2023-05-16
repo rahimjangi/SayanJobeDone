@@ -50,12 +50,12 @@ public class CountryController : ControllerBase
     [HttpDelete("[action]")]
     public async Task<ActionResult> Delete(int id)
     {
-        //var objectFromDb = await _repo.Country.GetFirstOrDefault(x => x.Id == id);
-        //if (objectFromDb != null)
-        //{
-        //    await _repo.Country.Remove(objectFromDb);
+        var objectFromDb = await _repo.Country.GetFirstOrDefault(x => x.Id == id);
+        if (objectFromDb != null)
+        {
+            await _repo.Country.Remove(objectFromDb);
 
-        //}
+        }
         return Ok();
     }
 }
