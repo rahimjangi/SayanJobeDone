@@ -1,8 +1,9 @@
 ﻿using SayanJobeDone.Shared.Dtos;
+using SayanJobeDone.Shared.Models;
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface ISkillRepository : IRepository<SkillDto>
+public interface ISkillRepository : IRepository<SkillDto, SignUpModel>
 {
 
 }

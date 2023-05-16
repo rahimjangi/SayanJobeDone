@@ -2,6 +2,7 @@
 {
     public class MobilePhoneDto
     {
+        public int Id { get; set; }
         public string Identifier { get; set; } = string.Empty;
         public string DeviceModel { get; set; } = string.Empty;
         public string OperatingSystem { get; set; } = string.Empty;

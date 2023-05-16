@@ -1,5 +1,6 @@
 ﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
+using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
 namespace SayanJobeDone.Shared.Data.Repository;
@@ -18,12 +19,12 @@ public class OccupationRepository : IOccupationRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<OccupationDto>> GetAll(Expression<Func<OccupationDto, bool>>? filter = null, Func<IQueryable<OccupationDto>, IOrderedQueryable<OccupationDto>>? orderby = null, string? includeProperties = null)
+    public Task<List<OccupationDto>> GetAll(Expression<Func<Occupation, bool>>? filter = null, Func<IQueryable<Occupation>, IOrderedQueryable<Occupation>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<OccupationDto> GetFirstOrDefault(Expression<Func<OccupationDto, bool>>? filter = null, string? includeProperties = null)
+    public Task<OccupationDto> GetFirstOrDefault(Expression<Func<Occupation, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }

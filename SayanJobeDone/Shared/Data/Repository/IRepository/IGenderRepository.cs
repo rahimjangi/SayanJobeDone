@@ -1,7 +1,8 @@
 ﻿using SayanJobeDone.Shared.Dtos;
+using SayanJobeDone.Shared.Models;
 
 namespace SayanJobeDone.Shared.Data.Repository.IRepository;
 
-public interface IGenderRepository : IRepository<GenderDto>
+public interface IGenderRepository : IRepository<GenderDto, Gender>
 {
 }

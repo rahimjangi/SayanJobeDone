@@ -1,5 +1,6 @@
 ﻿using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
+using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
 namespace SayanJobeDone.Shared.Data.Repository;
@@ -18,12 +19,12 @@ public class FileInformationRepository : IFileInformationRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<FileInformationDto>> GetAll(Expression<Func<FileInformationDto, bool>>? filter = null, Func<IQueryable<FileInformationDto>, IOrderedQueryable<FileInformationDto>>? orderby = null, string? includeProperties = null)
+    public Task<List<FileInformationDto>> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<FileInformationDto> GetFirstOrDefault(Expression<Func<FileInformationDto, bool>>? filter = null, string? includeProperties = null)
+    public Task<FileInformationDto> GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
     {
         throw new NotImplementedException();
     }

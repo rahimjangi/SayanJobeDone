@@ -42,7 +42,7 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<List<AddressDto>> GetAll(Expression<Func<AddressDto, bool>>? filter = null, Func<IQueryable<AddressDto>, IOrderedQueryable<AddressDto>>? orderby = null, string? includeProperties = null)
+    public async Task<List<AddressDto>> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
     {
         try
         {
@@ -56,7 +56,7 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<AddressDto> GetFirstOrDefault(Expression<Func<AddressDto, bool>>? filter = null, string? includeProperties = null)
+    public async Task<AddressDto> GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
     {
         //try
         //{

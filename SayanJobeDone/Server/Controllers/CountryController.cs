@@ -28,8 +28,8 @@ public class CountryController : ControllerBase
     [HttpGet("[action]")]
     public async Task<ActionResult<CountryDto>> Get(int id)
     {
-        //var result = await _repo.Country.GetFirstOrDefault(x => x.Id == id);
-        return Ok(null);
+        var result = await _repo.Country.GetFirstOrDefault(filter: (x => x.Id == id));
+        return Ok(result);
     }
 
 

@@ -4,6 +4,7 @@ namespace SayanJobeDone.Shared.Dtos
 {
     public class LocationDataDto
     {
+        public int Id { get; set; }
         public int MobilePhoneID { get; set; }
         [ForeignKey("MobilePhoneID")]
         public MobilePhoneDto? MobilePhone { get; set; }

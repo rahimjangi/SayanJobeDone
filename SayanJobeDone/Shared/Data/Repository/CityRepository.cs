@@ -42,7 +42,7 @@ public class CityRepository : ICityRepository
         }
     }
 
-    public async Task<List<CityDto>> GetAll(Expression<Func<CityDto, bool>>? filter = null, Func<IQueryable<CityDto>, IOrderedQueryable<CityDto>>? orderby = null, string? includeProperties = null)
+    public async Task<List<CityDto>> GetAll(Expression<Func<City, bool>>? filter = null, Func<IQueryable<City>, IOrderedQueryable<City>>? orderby = null, string? includeProperties = null)
     {
         try
         {
@@ -63,20 +63,20 @@ public class CityRepository : ICityRepository
 
     }
 
-    public async Task<CityDto> GetFirstOrDefault(Expression<Func<CityDto, bool>>? filter = null, string? includeProperties = null)
+    public async Task<CityDto> GetFirstOrDefault(Expression<Func<City, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
             if (includeProperties != null & filter != null)
             {
                 var resultInclude = await _db.Cities.Include(includeProperties!).FirstOrDefaultAsync(filter!);
-                if (resultInclude != null) return resultInclude;
+                if (resultInclude != null) return _mapper.Map<CityDto>(resultInclude);
             }
             else
             {
 
                 var result = await _db.Cities.FirstOrDefaultAsync(filter!);
-                return result!;
+                return _mapper.Map<CityDto>(result);
             }
         }
         catch (Exception e)
@@ -91,7 +91,7 @@ public class CityRepository : ICityRepository
     {
         try
         {
-            _db.Cities.Remove(entity);
+            _db.Cities.Remove(_mapper.Map<City>(entity));
             await _db.SaveChangesAsync();
         }
         catch (Exception e)
@@ -106,7 +106,7 @@ public class CityRepository : ICityRepository
     {
         try
         {
-            _db.Cities.RemoveRange(entities);
+            _db.Cities.RemoveRange(_mapper.Map<City>(entities));
             await _db.SaveChangesAsync();
         }
         catch (Exception e)
@@ -121,9 +121,9 @@ public class CityRepository : ICityRepository
     {
         try
         {
-            var updatedObj = _db.Cities.Update(entity);
+            var updatedObj = _db.Cities.Update(_mapper.Map<City>(entity));
             await _db.SaveChangesAsync();
-            return updatedObj.Entity;
+            return _mapper.Map<CityDto>(updatedObj.Entity);
         }
         catch (Exception e)
         {

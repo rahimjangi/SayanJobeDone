@@ -29,7 +29,7 @@ public class CategoryController : ControllerBase
     [HttpGet("[action]")]
     public async Task<ActionResult<CategoryDto>> Get(int id)
     {
-        //var result = await _repo.Category.GetFirstOrDefault(id);
+        var result = await _repo.Category.GetFirstOrDefault(x => x.Id == id);
         return Ok(null);
     }
     [HttpPost("[action]")]

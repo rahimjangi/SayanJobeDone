@@ -4,6 +4,7 @@ namespace SayanJobeDone.Shared.Dtos
 {
     public class PreviousEmploymentDto
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Company name is required")]
         public string CompanyName { get; set; } = string.Empty;

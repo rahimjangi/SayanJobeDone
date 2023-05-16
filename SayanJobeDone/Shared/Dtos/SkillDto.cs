@@ -5,6 +5,7 @@ namespace SayanJobeDone.Shared.Dtos
 {
     public class SkillDto
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Skill name is required")]
         public string Name { get; set; } = string.Empty;
