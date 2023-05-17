@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
@@ -17,87 +18,87 @@ public class MobilePhoneRepository : IMobilePhoneRepository
         _mapper = mapper;
     }
 
-    public Task Add(MobilePhoneDto entity)
+    public async Task Add(MobilePhoneDto entity)
     {
         try
         {
-
+            await _db.MobilePhones.AddAsync(_mapper.Map<MobilePhone>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
+
     }
 
-    public Task<List<MobilePhoneDto>> GetAll(Expression<Func<MobilePhone, bool>>? filter = null, Func<IQueryable<MobilePhone>, IOrderedQueryable<MobilePhone>>? orderby = null, string? includeProperties = null)
+    public async Task<List<MobilePhoneDto>> GetAll(Expression<Func<MobilePhone, bool>>? filter = null, Func<IQueryable<MobilePhone>, IOrderedQueryable<MobilePhone>>? orderby = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<List<MobilePhoneDto>>(await _db.MobilePhones.ToListAsync());
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<MobilePhoneDto> GetFirstOrDefault(Expression<Func<MobilePhone, bool>>? filter = null, string? includeProperties = null)
+    public async Task<MobilePhoneDto> GetFirstOrDefault(Expression<Func<MobilePhone, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<MobilePhoneDto>(await _db.MobilePhones.FirstOrDefaultAsync(filter!));
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task Remove(MobilePhoneDto entity)
+    public async Task Remove(MobilePhoneDto entity)
     {
         try
         {
-
+            _db.MobilePhones.Remove(_mapper.Map<MobilePhone>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<MobilePhoneDto> entities)
+    public async Task RemoveRange(IEnumerable<MobilePhoneDto> entities)
     {
         try
         {
-
+            _db.MobilePhones.RemoveRange(_mapper.Map<IEnumerable<MobilePhone>>(entities));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<MobilePhoneDto> Update(MobilePhoneDto entity)
+    public async Task<MobilePhoneDto> Update(MobilePhoneDto entity)
     {
         try
         {
-
+            var result = _db.MobilePhones.Update(_mapper.Map<MobilePhone>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<MobilePhoneDto>(result);
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 }

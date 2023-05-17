@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
@@ -17,87 +18,86 @@ public class PreviousEmploymentRepository : IPreviousEmploymentRepository
         _mapper = mapper;
     }
 
-    public Task Add(PreviousEmploymentDto entity)
+    public async Task Add(PreviousEmploymentDto entity)
     {
         try
         {
-
+            await _db.PreviousEmployments.AddAsync(_mapper.Map<PreviousEmployment>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<List<PreviousEmploymentDto>> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
+    public async Task<List<PreviousEmploymentDto>> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<List<PreviousEmploymentDto>>(await _db.PreviousEmployments.ToListAsync());
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<PreviousEmploymentDto> GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
+    public async Task<PreviousEmploymentDto> GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<PreviousEmploymentDto>(await _db.PreviousEmployments.FirstOrDefaultAsync(filter!));
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task Remove(PreviousEmploymentDto entity)
+    public async Task Remove(PreviousEmploymentDto entity)
     {
         try
         {
-
+            _db.PreviousEmployments.Remove(_mapper.Map<PreviousEmployment>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<PreviousEmploymentDto> entities)
+    public async Task RemoveRange(IEnumerable<PreviousEmploymentDto> entities)
     {
         try
         {
-
+            _db.PreviousEmployments.RemoveRange(_mapper.Map<IEnumerable<PreviousEmployment>>(entities));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<PreviousEmploymentDto> Update(PreviousEmploymentDto entity)
+    public async Task<PreviousEmploymentDto> Update(PreviousEmploymentDto entity)
     {
         try
         {
-
+            var result = _db.PreviousEmployments.Update(_mapper.Map<PreviousEmployment>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<PreviousEmploymentDto>(result);
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 }

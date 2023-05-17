@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
@@ -17,87 +18,86 @@ public class ServiceReceiverRepository : IServiceReceiverRepository
         _mapper = mapper;
     }
 
-    public Task Add(ServiceReceiverDto entity)
+    public async Task Add(ServiceReceiverDto entity)
     {
         try
         {
-
+            await _db.ServiceReceivers.AddAsync(_mapper.Map<ServiceReceiver>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<List<ServiceReceiverDto>> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
+    public async Task<List<ServiceReceiverDto>> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<List<ServiceReceiverDto>>(await _db.ServiceReceivers.ToListAsync());
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<ServiceReceiverDto> GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceReceiverDto> GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<ServiceReceiverDto>(await _db.ServiceReceivers.FirstOrDefaultAsync(filter!));
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task Remove(ServiceReceiverDto entity)
+    public async Task Remove(ServiceReceiverDto entity)
     {
         try
         {
-
+            _db.ServiceReceivers.Remove(_mapper.Map<ServiceReceiver>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<ServiceReceiverDto> entities)
+    public async Task RemoveRange(IEnumerable<ServiceReceiverDto> entities)
     {
         try
         {
-
+            _db.ServiceReceivers.RemoveRange(_mapper.Map<IEnumerable<ServiceReceiver>>(entities));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<ServiceReceiverDto> Update(ServiceReceiverDto entity)
+    public async Task<ServiceReceiverDto> Update(ServiceReceiverDto entity)
     {
         try
         {
-
+            var result = _db.ServiceReceivers.Update(_mapper.Map<ServiceReceiver>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<ServiceReceiverDto>(result);
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 }

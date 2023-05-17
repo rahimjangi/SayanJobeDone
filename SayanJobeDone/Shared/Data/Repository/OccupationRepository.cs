@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
@@ -17,87 +18,86 @@ public class OccupationRepository : IOccupationRepository
         _mapper = mapper;
     }
 
-    public Task Add(OccupationDto entity)
+    public async Task Add(OccupationDto entity)
     {
         try
         {
-
+            await _db.Occupations.AddAsync(_mapper.Map<Occupation>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<List<OccupationDto>> GetAll(Expression<Func<Occupation, bool>>? filter = null, Func<IQueryable<Occupation>, IOrderedQueryable<Occupation>>? orderby = null, string? includeProperties = null)
+    public async Task<List<OccupationDto>> GetAll(Expression<Func<Occupation, bool>>? filter = null, Func<IQueryable<Occupation>, IOrderedQueryable<Occupation>>? orderby = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<List<OccupationDto>>(await _db.Occupations.ToListAsync());
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<OccupationDto> GetFirstOrDefault(Expression<Func<Occupation, bool>>? filter = null, string? includeProperties = null)
+    public async Task<OccupationDto> GetFirstOrDefault(Expression<Func<Occupation, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<OccupationDto>(await _db.Occupations.FirstOrDefaultAsync(filter!));
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task Remove(OccupationDto entity)
+    public async Task Remove(OccupationDto entity)
     {
         try
         {
-
+            _db.Occupations.Remove(_mapper.Map<Occupation>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<OccupationDto> entities)
+    public async Task RemoveRange(IEnumerable<OccupationDto> entities)
     {
         try
         {
-
+            _db.Occupations.RemoveRange(_mapper.Map<IEnumerable<Occupation>>(entities));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<OccupationDto> Update(OccupationDto entity)
+    public async Task<OccupationDto> Update(OccupationDto entity)
     {
         try
         {
-
+            var result = _db.Occupations.Update(_mapper.Map<Occupation>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<OccupationDto>(result);
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 }

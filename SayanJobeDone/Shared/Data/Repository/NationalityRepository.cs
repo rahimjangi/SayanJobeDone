@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
@@ -17,87 +18,86 @@ public class NationalityRepository : INationalityRepository
         _mapper = mapper;
     }
 
-    public Task Add(NationalityDto entity)
+    public async Task Add(NationalityDto entity)
     {
         try
         {
-
+            await _db.Nationalities.AddAsync(_mapper.Map<Nationality>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<List<NationalityDto>> GetAll(Expression<Func<Nationality, bool>>? filter = null, Func<IQueryable<Nationality>, IOrderedQueryable<Nationality>>? orderby = null, string? includeProperties = null)
+    public async Task<List<NationalityDto>> GetAll(Expression<Func<Nationality, bool>>? filter = null, Func<IQueryable<Nationality>, IOrderedQueryable<Nationality>>? orderby = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<List<NationalityDto>>(await _db.Nationalities.ToListAsync());
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<NationalityDto> GetFirstOrDefault(Expression<Func<Nationality, bool>>? filter = null, string? includeProperties = null)
+    public async Task<NationalityDto> GetFirstOrDefault(Expression<Func<Nationality, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<NationalityDto>(await _db.Nationalities.FirstOrDefaultAsync(filter!));
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task Remove(NationalityDto entity)
+    public async Task Remove(NationalityDto entity)
     {
         try
         {
-
+            _db.Nationalities.Remove(_mapper.Map<Nationality>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<NationalityDto> entities)
+    public async Task RemoveRange(IEnumerable<NationalityDto> entities)
     {
         try
         {
-
+            _db.Nationalities.RemoveRange(_mapper.Map<IEnumerable<Nationality>>(entities));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<NationalityDto> Update(NationalityDto entity)
+    public async Task<NationalityDto> Update(NationalityDto entity)
     {
         try
         {
-
+            var result = _db.Nationalities.Update(_mapper.Map<Nationality>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<NationalityDto>(result);
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 }
