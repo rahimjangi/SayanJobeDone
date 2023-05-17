@@ -23,6 +23,8 @@ public class AddressRepository : IAddressRepository
         try
         {
             var address = _mapper.Map<Address>(entity);
+            var country = await _db.Countries.FirstOrDefaultAsync(x => x.Id == entity.CountryId);
+            address.Country = country;
             var cityFromDb = await _db.Cities.FirstOrDefaultAsync(x => x.Id == entity.CityId);
             if (cityFromDb != null)
             {

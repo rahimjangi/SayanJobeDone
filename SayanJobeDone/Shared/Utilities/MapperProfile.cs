@@ -10,6 +10,7 @@ public class MapperProfile : Profile
     {
         CreateMap<Address, AddressDto>().ReverseMap();
         CreateMap<City, CityDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>().ReverseMap();
         CreateMap<Country, CountryDto>().ReverseMap();
         CreateMap<EducationLevel, EducationLevelDto>().ReverseMap();
         CreateMap<EmploymentStatus, EmploymentStatusDto>().ReverseMap();

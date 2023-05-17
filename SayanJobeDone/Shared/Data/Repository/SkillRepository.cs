@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SayanJobeDone.Shared.Data.Repository.IRepository;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
@@ -17,87 +18,86 @@ public class SkillRepository : ISkillRepository
         _mapper = mapper;
     }
 
-    public Task Add(SkillDto entity)
+    public async Task Add(SkillDto entity)
     {
         try
         {
-
+            await _db.Skills.AddAsync(_mapper.Map<Skill>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<List<SkillDto>> GetAll(Expression<Func<SignUpModel, bool>>? filter = null, Func<IQueryable<SignUpModel>, IOrderedQueryable<SignUpModel>>? orderby = null, string? includeProperties = null)
+    public async Task<List<SkillDto>> GetAll(Expression<Func<Skill, bool>>? filter = null, Func<IQueryable<Skill>, IOrderedQueryable<Skill>>? orderby = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<List<SkillDto>>(await _db.Skills.ToListAsync());
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<SkillDto> GetFirstOrDefault(Expression<Func<SignUpModel, bool>>? filter = null, string? includeProperties = null)
+    public async Task<SkillDto> GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
     {
         try
         {
-
+            return _mapper.Map<SkillDto>(await _db.Skills.FirstOrDefaultAsync(filter!));
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task Remove(SkillDto entity)
+    public async Task Remove(SkillDto entity)
     {
         try
         {
-
+            _db.Skills.Remove(_mapper.Map<Skill>(entity));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task RemoveRange(IEnumerable<SkillDto> entities)
+    public async Task RemoveRange(IEnumerable<SkillDto> entities)
     {
         try
         {
-
+            _db.Skills.RemoveRange(_mapper.Map<IEnumerable<Skill>>(entities));
+            await _db.SaveChangesAsync();
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 
-    public Task<SkillDto> Update(SkillDto entity)
+    public async Task<SkillDto> Update(SkillDto entity)
     {
         try
         {
-
+            var result = _db.Skills.Update(_mapper.Map<Skill>(entity));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<SkillDto>(result);
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
-        throw new NotImplementedException();
     }
 }
