@@ -25,6 +25,7 @@
 
 @code {
     private bool collapseNavMenu = true;
+    public List<CategoryDto>? categories { get; set; }
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 

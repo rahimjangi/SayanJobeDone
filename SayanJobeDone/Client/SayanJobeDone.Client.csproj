@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Shared\SayanJobeDone.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Category\" />
+    <Folder Include="Pages\Register\" />
+  </ItemGroup>
+
 </Project>

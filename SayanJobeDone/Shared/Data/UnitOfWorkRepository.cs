@@ -1,6 +1,27 @@
 ﻿using AutoMapper;
 using SayanJobeDone.Shared.Data.Repository;
-using SayanJobeDone.Shared.Data.Repository.IRepository;
+using SayanJobeDone.Shared.Services.AddressService;
+using SayanJobeDone.Shared.Services.CategoryService;
+using SayanJobeDone.Shared.Services.CityService;
+using SayanJobeDone.Shared.Services.CountryService;
+using SayanJobeDone.Shared.Services.EducationLevelService;
+using SayanJobeDone.Shared.Services.EmploymentStatusService;
+using SayanJobeDone.Shared.Services.FileInformationService;
+using SayanJobeDone.Shared.Services.GenderService;
+using SayanJobeDone.Shared.Services.LanguageService;
+using SayanJobeDone.Shared.Services.LocationDataService;
+using SayanJobeDone.Shared.Services.LoginModelService;
+using SayanJobeDone.Shared.Services.MobilePhoneService;
+using SayanJobeDone.Shared.Services.NationalityService;
+using SayanJobeDone.Shared.Services.OccupationService;
+using SayanJobeDone.Shared.Services.PreviousEmploymentService;
+using SayanJobeDone.Shared.Services.RateTypeService;
+using SayanJobeDone.Shared.Services.ServiceProvidersService;
+using SayanJobeDone.Shared.Services.ServiceReceiverService;
+using SayanJobeDone.Shared.Services.ServiceService;
+using SayanJobeDone.Shared.Services.SignUpModelService;
+using SayanJobeDone.Shared.Services.SkillService;
+using SayanJobeDone.Shared.Services.UserServise;
 
 namespace SayanJobeDone.Shared.Data;
 
