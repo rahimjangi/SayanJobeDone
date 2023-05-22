@@ -42,8 +42,9 @@ public class CityRepository : ICityRepository
         }
     }
 
-    public async Task<List<CityDto>> GetAll(Expression<Func<City, bool>>? filter = null, Func<IQueryable<City>, IOrderedQueryable<City>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<CityDto>>> GetAll(Expression<Func<City, bool>>? filter = null, Func<IQueryable<City>, IOrderedQueryable<City>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<CityDto>> sr = new ServiceResponse<List<CityDto>>();
         try
         {
 
@@ -51,9 +52,14 @@ public class CityRepository : ICityRepository
             if (includeProperties != null)
             {
                 var valueList = await _db.Cities.Include(includeProperties).ToListAsync();
-                return _mapper.Map<List<CityDto>>(valueList);
+                var resultInclude = _mapper.Map<List<CityDto>>(valueList);
+                sr.Data = resultInclude;
+                return sr;
             }
-            return _mapper.Map<List<CityDto>>(await _db.Cities.ToListAsync());
+            var result = _mapper.Map<List<CityDto>>(await _db.Cities.ToListAsync());
+            sr.Data = result;
+            return sr;
+
         }
         catch (Exception e)
         {
@@ -63,21 +69,26 @@ public class CityRepository : ICityRepository
 
     }
 
-    public async Task<CityDto> GetFirstOrDefault(Expression<Func<City, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<CityDto>> GetFirstOrDefault(Expression<Func<City, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<CityDto> sr = new ServiceResponse<CityDto>();
         try
         {
             if (includeProperties != null & filter != null)
             {
                 var resultInclude = await _db.Cities.Include(includeProperties!).FirstOrDefaultAsync(filter!);
-                if (resultInclude != null) return _mapper.Map<CityDto>(resultInclude);
+                if (resultInclude != null)
+                {
+                    sr.Data = _mapper.Map<CityDto>(resultInclude);
+                }
             }
             else
             {
 
                 var result = await _db.Cities.FirstOrDefaultAsync(filter!);
-                return _mapper.Map<CityDto>(result);
+                sr.Data = _mapper.Map<CityDto>(result);
             }
+            return sr;
         }
         catch (Exception e)
         {
@@ -117,13 +128,15 @@ public class CityRepository : ICityRepository
 
     }
 
-    public async Task<CityDto> Update(CityDto entity)
+    public async Task<ServiceResponse<CityDto>> Update(CityDto entity)
     {
+        ServiceResponse<CityDto> sr = new ServiceResponse<CityDto>();
         try
         {
             var updatedObj = _db.Cities.Update(_mapper.Map<City>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<CityDto>(updatedObj.Entity);
+            sr.Data = _mapper.Map<CityDto>(updatedObj.Entity);
+            return sr;
         }
         catch (Exception e)
         {

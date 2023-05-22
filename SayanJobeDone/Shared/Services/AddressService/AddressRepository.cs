@@ -44,12 +44,18 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<List<AddressDto>> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<AddressDto>>> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<AddressDto>> sr = new ServiceResponse<List<AddressDto>>();
         try
         {
             var result = await _db.Addresses.ToListAsync();
-            return _mapper.Map<List<AddressDto>>(result);
+            var addressDtos = _mapper.Map<List<AddressDto>>(result);
+            sr.Data = addressDtos;
+            sr.Message = "Success";
+            sr.Status = true;
+            return sr;
+
         }
         catch (Exception e)
         {
@@ -58,8 +64,9 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<AddressDto> GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<AddressDto>> GetFirstOrDefault(Expression<Func<Address, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<AddressDto> sr = new ServiceResponse<AddressDto>();
         try
         {
             var result = new AddressDto();
@@ -67,7 +74,10 @@ public class AddressRepository : IAddressRepository
             {
                 result = _mapper.Map<AddressDto>(await _db.Addresses.FirstOrDefaultAsync(filter));
             }
-            return result!;
+            sr.Data = result;
+            sr.Status = true;
+            sr.Message = "Success";
+            return sr;
         }
         catch (Exception e)
         {
@@ -105,13 +115,18 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<AddressDto> Update(AddressDto entity)
+    public async Task<ServiceResponse<AddressDto>> Update(AddressDto entity)
     {
+        ServiceResponse<AddressDto> sr = new ServiceResponse<AddressDto>();
         try
         {
             var updatedObj = _db.Addresses.Update(_mapper.Map<Address>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<AddressDto>(updatedObj.Entity);
+            var result = _mapper.Map<AddressDto>(updatedObj.Entity);
+            sr.Status = true;
+            sr.Data = result;
+            sr.Message = "Success";
+            return sr;
         }
         catch (Exception e)
         {

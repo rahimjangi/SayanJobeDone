@@ -32,11 +32,13 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<List<UserDto>> GetAll(Expression<Func<User, bool>>? filter = null, Func<IQueryable<User>, IOrderedQueryable<User>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<UserDto>>> GetAll(Expression<Func<User, bool>>? filter = null, Func<IQueryable<User>, IOrderedQueryable<User>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<UserDto>> sr = new ServiceResponse<List<UserDto>>();
         try
         {
-            return _mapper.Map<List<UserDto>>(await _db.Users.ToListAsync());
+            sr.Data = _mapper.Map<List<UserDto>>(await _db.Users.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<UserDto> GetFirstOrDefault(Expression<Func<User, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<UserDto>> GetFirstOrDefault(Expression<Func<User, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<UserDto> sr = new ServiceResponse<UserDto>();
         try
         {
-            return _mapper.Map<UserDto>(await _db.Users.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<UserDto>(await _db.Users.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<UserDto> Update(UserDto entity)
+    public async Task<ServiceResponse<UserDto>> Update(UserDto entity)
     {
+        ServiceResponse<UserDto> sr = new ServiceResponse<UserDto>();
         try
         {
             var result = _db.Users.Update(_mapper.Map<User>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<UserDto>(result);
+            sr.Data = _mapper.Map<UserDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

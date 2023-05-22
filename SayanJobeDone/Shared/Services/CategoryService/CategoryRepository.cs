@@ -33,11 +33,16 @@ public class CategoryRepository : ICategoryRepository
         }
     }
 
-    public async Task<List<CategoryDto>> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<CategoryDto>>> GetAll(Expression<Func<Category, bool>>? filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<CategoryDto>> sr = new ServiceResponse<List<CategoryDto>>();
         try
         {
-            return _mapper.Map<List<CategoryDto>>(await _db.Categories.ToListAsync());
+            var result = _mapper.Map<List<CategoryDto>>(await _db.Categories.ToListAsync());
+            sr.Data = result;
+            sr.Message = "Success";
+            sr.Status = true;
+            return sr;
         }
         catch (Exception e)
         {
@@ -46,11 +51,16 @@ public class CategoryRepository : ICategoryRepository
         }
     }
 
-    public async Task<CategoryDto> GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<CategoryDto>> GetFirstOrDefault(Expression<Func<Category, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<CategoryDto> sr = new ServiceResponse<CategoryDto>();
         try
         {
-            return _mapper.Map<CategoryDto>(await _db.Categories.FirstOrDefaultAsync(filter!));
+            var result = _mapper.Map<CategoryDto>(await _db.Categories.FirstOrDefaultAsync(filter!));
+            sr.Data = result;
+            sr.Message = "Success";
+            sr.Status = true;
+            return sr;
         }
         catch (Exception e)
         {
@@ -87,13 +97,15 @@ public class CategoryRepository : ICategoryRepository
         }
     }
 
-    public async Task<CategoryDto> Update(CategoryDto entity)
+    public async Task<ServiceResponse<CategoryDto>> Update(CategoryDto entity)
     {
+        ServiceResponse<CategoryDto> sr = new ServiceResponse<CategoryDto>();
         try
         {
             var result = _mapper.Map<CategoryDto>(_db.Categories.Update(_mapper.Map<Category>(entity)));
             await _db.SaveChangesAsync();
-            return result;
+            sr.Data = result;
+            return sr;
         }
         catch (Exception e)
         {

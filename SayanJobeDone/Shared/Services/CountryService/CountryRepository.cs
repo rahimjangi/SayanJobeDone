@@ -31,8 +31,9 @@ public class CountryRepository : ICountryRepository
         }
     }
 
-    public async Task<List<CountryDto>> GetAll(Expression<Func<Country, bool>>? filter = null, Func<IQueryable<Country>, IOrderedQueryable<Country>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<CountryDto>>> GetAll(Expression<Func<Country, bool>>? filter = null, Func<IQueryable<Country>, IOrderedQueryable<Country>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<CountryDto>> sr = new ServiceResponse<List<CountryDto>>();
         try
         {
             if (filter != null)
@@ -40,11 +41,13 @@ public class CountryRepository : ICountryRepository
                 var countryFilter = _mapper.Map<Expression<Func<Country, bool>>, Expression<Func<Country, bool>>>(filter);
                 var listOfCountry = await _db.Countries.Where(countryFilter).ToListAsync();
                 var result = _mapper.Map<List<CountryDto>>(listOfCountry);
-                return result;
+                sr.Data = result;
+                return sr;
             }
             else
             {
-                return _mapper.Map<List<CountryDto>>(await _db.Countries.ToListAsync());
+                sr.Data = _mapper.Map<List<CountryDto>>(await _db.Countries.ToListAsync());
+                return sr;
             }
         }
         catch (Exception e)
@@ -54,13 +57,14 @@ public class CountryRepository : ICountryRepository
         }
     }
 
-    public async Task<CountryDto> GetFirstOrDefault(Expression<Func<Country, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<CountryDto>> GetFirstOrDefault(Expression<Func<Country, bool>>? filter = null, string? includeProperties = null)
     {
-
+        ServiceResponse<CountryDto> sr = new ServiceResponse<CountryDto>();
         try
         {
             var countryFromDb = await _db.Countries.FirstOrDefaultAsync(filter!);
-            return _mapper.Map<CountryDto>(countryFromDb);
+            sr.Data = _mapper.Map<CountryDto>(countryFromDb);
+            return sr;
         }
         catch (Exception e)
         {
@@ -97,13 +101,15 @@ public class CountryRepository : ICountryRepository
         }
     }
 
-    public async Task<CountryDto> Update(CountryDto entity)
+    public async Task<ServiceResponse<CountryDto>> Update(CountryDto entity)
     {
+        ServiceResponse<CountryDto> sr = new ServiceResponse<CountryDto>();
         try
         {
             var result = _db.Countries.Update(_mapper.Map<Country>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<CountryDto>(result);
+            sr.Data = _mapper.Map<CountryDto>(result);
+            return sr;
 
         }
         catch (Exception e)

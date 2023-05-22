@@ -32,11 +32,13 @@ public class GenderRepository : IGenderRepository
         }
     }
 
-    public async Task<List<GenderDto>> GetAll(Expression<Func<Gender, bool>>? filter = null, Func<IQueryable<Gender>, IOrderedQueryable<Gender>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<GenderDto>>> GetAll(Expression<Func<Gender, bool>>? filter = null, Func<IQueryable<Gender>, IOrderedQueryable<Gender>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<GenderDto>> sr = new ServiceResponse<List<GenderDto>>();
         try
         {
-            return _mapper.Map<List<GenderDto>>(await _db.Genders.ToListAsync());
+            sr.Data = _mapper.Map<List<GenderDto>>(await _db.Genders.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class GenderRepository : IGenderRepository
         }
     }
 
-    public async Task<GenderDto> GetFirstOrDefault(Expression<Func<Gender, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<GenderDto>> GetFirstOrDefault(Expression<Func<Gender, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<GenderDto> sr = new ServiceResponse<GenderDto>();
         try
         {
-            return _mapper.Map<GenderDto>(await _db.Genders.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<GenderDto>(await _db.Genders.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class GenderRepository : IGenderRepository
         }
     }
 
-    public async Task<GenderDto> Update(GenderDto entity)
+    public async Task<ServiceResponse<GenderDto>> Update(GenderDto entity)
     {
+        ServiceResponse<GenderDto> sr = new ServiceResponse<GenderDto>();
         try
         {
             var result = _db.Genders.Update(_mapper.Map<Gender>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<GenderDto>(result);
+            sr.Data = _mapper.Map<GenderDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

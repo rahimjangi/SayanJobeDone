@@ -32,11 +32,13 @@ public class FileInformationRepository : IFileInformationRepository
         }
     }
 
-    public async Task<List<FileInformationDto>> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<FileInformationDto>>> GetAll(Expression<Func<FileInformation, bool>>? filter = null, Func<IQueryable<FileInformation>, IOrderedQueryable<FileInformation>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<FileInformationDto>> sr = new ServiceResponse<List<FileInformationDto>>();
         try
         {
-            return _mapper.Map<List<FileInformationDto>>(await _db.FileInformation.ToListAsync());
+            sr.Data = _mapper.Map<List<FileInformationDto>>(await _db.FileInformation.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class FileInformationRepository : IFileInformationRepository
         }
     }
 
-    public async Task<FileInformationDto> GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<FileInformationDto>> GetFirstOrDefault(Expression<Func<FileInformation, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<FileInformationDto> sr = new ServiceResponse<FileInformationDto>();
         try
         {
-            return _mapper.Map<FileInformationDto>(await _db.FileInformation.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<FileInformationDto>(await _db.FileInformation.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class FileInformationRepository : IFileInformationRepository
         }
     }
 
-    public async Task<FileInformationDto> Update(FileInformationDto entity)
+    public async Task<ServiceResponse<FileInformationDto>> Update(FileInformationDto entity)
     {
+        ServiceResponse<FileInformationDto> sr = new ServiceResponse<FileInformationDto>();
         try
         {
             var result = _db.FileInformation.Update(_mapper.Map<FileInformation>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<FileInformationDto>(result);
+            sr.Data = _mapper.Map<FileInformationDto>(result);
+            return sr;
         }
         catch (Exception e)
         {
