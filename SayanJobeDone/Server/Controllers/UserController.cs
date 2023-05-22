@@ -56,7 +56,7 @@ namespace SayanJobeDone.Server.Controllers
             var objectFromDb = await _repo.User.GetFirstOrDefault(x => x.Id == id);
             if (objectFromDb != null)
             {
-                await _repo.User.Remove(objectFromDb);
+                await _repo.User.Remove(objectFromDb.Data!);
 
             }
             return Ok();

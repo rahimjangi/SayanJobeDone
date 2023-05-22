@@ -32,11 +32,13 @@ public class RateTypeRepository : IRateTypeRepository
         }
     }
 
-    public async Task<List<RateTypeDto>> GetAll(Expression<Func<RateType, bool>>? filter = null, Func<IQueryable<RateType>, IOrderedQueryable<RateType>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<RateTypeDto>>> GetAll(Expression<Func<RateType, bool>>? filter = null, Func<IQueryable<RateType>, IOrderedQueryable<RateType>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<RateTypeDto>> sr = new ServiceResponse<List<RateTypeDto>>();
         try
         {
-            return _mapper.Map<List<RateTypeDto>>(await _db.RateTypes.ToListAsync());
+            sr.Data = _mapper.Map<List<RateTypeDto>>(await _db.RateTypes.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class RateTypeRepository : IRateTypeRepository
         }
     }
 
-    public async Task<RateTypeDto> GetFirstOrDefault(Expression<Func<RateType, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<RateTypeDto>> GetFirstOrDefault(Expression<Func<RateType, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<RateTypeDto> sr = new ServiceResponse<RateTypeDto>();
         try
         {
-            return _mapper.Map<RateTypeDto>(await _db.RateTypes.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<RateTypeDto>(await _db.RateTypes.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class RateTypeRepository : IRateTypeRepository
         }
     }
 
-    public async Task<RateTypeDto> Update(RateTypeDto entity)
+    public async Task<ServiceResponse<RateTypeDto>> Update(RateTypeDto entity)
     {
+        ServiceResponse<RateTypeDto> sr = new ServiceResponse<RateTypeDto>();
         try
         {
             var result = _db.RateTypes.Update(_mapper.Map<RateType>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<RateTypeDto>(result);
+            sr.Data = _mapper.Map<RateTypeDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

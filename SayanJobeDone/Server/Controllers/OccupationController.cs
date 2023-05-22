@@ -55,7 +55,7 @@ public class OccupationController : ControllerBase
         var objectFromDb = await _repo.Occupation.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.Occupation.Remove(objectFromDb);
+            await _repo.Occupation.Remove(objectFromDb.Data!);
 
         }
         return Ok();

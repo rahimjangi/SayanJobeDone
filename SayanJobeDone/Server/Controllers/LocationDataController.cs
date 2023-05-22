@@ -54,7 +54,7 @@ public class LocationDataController : ControllerBase
         var objectFromDb = await _repo.LocationData.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.LocationData.Remove(objectFromDb);
+            await _repo.LocationData.Remove(objectFromDb.Data!);
 
         }
         return Ok();

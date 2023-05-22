@@ -54,7 +54,7 @@ public class FileInformationController : ControllerBase
         var objectFromDb = await _repo.FileInformation.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.FileInformation.Remove(objectFromDb);
+            await _repo.FileInformation.Remove(objectFromDb.Data!);
 
         }
         return Ok();

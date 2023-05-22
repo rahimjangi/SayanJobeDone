@@ -55,7 +55,7 @@ public class MobilePhoneController : ControllerBase
         var objectFromDb = await _repo.MobilePhone.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.MobilePhone.Remove(objectFromDb);
+            await _repo.MobilePhone.Remove(objectFromDb.Data!);
 
         }
         return Ok();

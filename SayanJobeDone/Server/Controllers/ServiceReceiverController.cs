@@ -54,7 +54,7 @@ public class ServiceReceiverController : ControllerBase
         var objectFromDb = await _repo.ServiceReceiver.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.ServiceReceiver.Remove(objectFromDb);
+            await _repo.ServiceReceiver.Remove(objectFromDb.Data!);
 
         }
         return Ok();

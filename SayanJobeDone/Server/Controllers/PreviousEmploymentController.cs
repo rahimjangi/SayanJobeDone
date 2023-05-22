@@ -55,7 +55,7 @@ public class PreviousEmploymentController : ControllerBase
         var objectFromDb = await _repo.PreviousEmployment.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.PreviousEmployment.Remove(objectFromDb);
+            await _repo.PreviousEmployment.Remove(objectFromDb.Data!);
 
         }
         return Ok();

@@ -32,11 +32,13 @@ public class ServiceReceiverRepository : IServiceReceiverRepository
         }
     }
 
-    public async Task<List<ServiceReceiverDto>> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<ServiceReceiverDto>>> GetAll(Expression<Func<ServiceReceiver, bool>>? filter = null, Func<IQueryable<ServiceReceiver>, IOrderedQueryable<ServiceReceiver>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<ServiceReceiverDto>> sr = new ServiceResponse<List<ServiceReceiverDto>>();
         try
         {
-            return _mapper.Map<List<ServiceReceiverDto>>(await _db.ServiceReceivers.ToListAsync());
+            sr.Data = _mapper.Map<List<ServiceReceiverDto>>(await _db.ServiceReceivers.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class ServiceReceiverRepository : IServiceReceiverRepository
         }
     }
 
-    public async Task<ServiceReceiverDto> GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<ServiceReceiverDto>> GetFirstOrDefault(Expression<Func<ServiceReceiver, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<ServiceReceiverDto> sr = new ServiceResponse<ServiceReceiverDto>();
         try
         {
-            return _mapper.Map<ServiceReceiverDto>(await _db.ServiceReceivers.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<ServiceReceiverDto>(await _db.ServiceReceivers.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class ServiceReceiverRepository : IServiceReceiverRepository
         }
     }
 
-    public async Task<ServiceReceiverDto> Update(ServiceReceiverDto entity)
+    public async Task<ServiceResponse<ServiceReceiverDto>> Update(ServiceReceiverDto entity)
     {
+        ServiceResponse<ServiceReceiverDto> sr = new ServiceResponse<ServiceReceiverDto>();
         try
         {
             var result = _db.ServiceReceivers.Update(_mapper.Map<ServiceReceiver>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<ServiceReceiverDto>(result);
+            sr.Data = _mapper.Map<ServiceReceiverDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

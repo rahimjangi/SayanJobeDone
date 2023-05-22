@@ -55,7 +55,7 @@ public class SignUpModelController : ControllerBase
         var objectFromDb = await _repo.SignUpModel.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.SignUpModel.Remove(objectFromDb);
+            await _repo.SignUpModel.Remove(objectFromDb.Data!);
 
         }
         return Ok();

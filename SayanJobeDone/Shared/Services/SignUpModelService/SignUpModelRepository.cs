@@ -32,11 +32,13 @@ public class SignUpModelRepository : ISignUpModelRepository
         }
     }
 
-    public async Task<List<SignUpModelDto>> GetAll(Expression<Func<SignUpModel, bool>>? filter = null, Func<IQueryable<SignUpModel>, IOrderedQueryable<SignUpModel>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<SignUpModelDto>>> GetAll(Expression<Func<SignUpModel, bool>>? filter = null, Func<IQueryable<SignUpModel>, IOrderedQueryable<SignUpModel>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<SignUpModelDto>> sr = new ServiceResponse<List<SignUpModelDto>>();
         try
         {
-            return _mapper.Map<List<SignUpModelDto>>(await _db.SignUpModel.ToListAsync());
+            sr.Data = _mapper.Map<List<SignUpModelDto>>(await _db.SignUpModel.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class SignUpModelRepository : ISignUpModelRepository
         }
     }
 
-    public async Task<SignUpModelDto> GetFirstOrDefault(Expression<Func<SignUpModel, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<SignUpModelDto>> GetFirstOrDefault(Expression<Func<SignUpModel, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<SignUpModelDto> sr = new ServiceResponse<SignUpModelDto>();
         try
         {
-            return _mapper.Map<SignUpModelDto>(await _db.SignUpModel.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<SignUpModelDto>(await _db.SignUpModel.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class SignUpModelRepository : ISignUpModelRepository
         }
     }
 
-    public async Task<SignUpModelDto> Update(SignUpModelDto entity)
+    public async Task<ServiceResponse<SignUpModelDto>> Update(SignUpModelDto entity)
     {
+        ServiceResponse<SignUpModelDto> sr = new ServiceResponse<SignUpModelDto>();
         try
         {
             var result = _db.SignUpModel.Update(_mapper.Map<SignUpModel>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<SignUpModelDto>(result);
+            sr.Data = _mapper.Map<SignUpModelDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

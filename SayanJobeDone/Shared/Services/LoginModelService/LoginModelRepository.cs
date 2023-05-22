@@ -32,11 +32,13 @@ public class LoginModelRepository : ILoginModelRepository
         }
     }
 
-    public async Task<List<LoginModelDto>> GetAll(Expression<Func<LoginModel, bool>>? filter = null, Func<IQueryable<LoginModel>, IOrderedQueryable<LoginModel>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<LoginModelDto>>> GetAll(Expression<Func<LoginModel, bool>>? filter = null, Func<IQueryable<LoginModel>, IOrderedQueryable<LoginModel>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<LoginModelDto>> sr = new ServiceResponse<List<LoginModelDto>>();
         try
         {
-            return _mapper.Map<List<LoginModelDto>>(await _db.LoginModel.ToListAsync());
+            sr.Data = _mapper.Map<List<LoginModelDto>>(await _db.LoginModel.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class LoginModelRepository : ILoginModelRepository
         }
     }
 
-    public async Task<LoginModelDto> GetFirstOrDefault(Expression<Func<LoginModel, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<LoginModelDto>> GetFirstOrDefault(Expression<Func<LoginModel, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<LoginModelDto> sr = new ServiceResponse<LoginModelDto>();
         try
         {
-            return _mapper.Map<LoginModelDto>(await _db.LoginModel.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<LoginModelDto>(await _db.LoginModel.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class LoginModelRepository : ILoginModelRepository
         }
     }
 
-    public async Task<LoginModelDto> Update(LoginModelDto entity)
+    public async Task<ServiceResponse<LoginModelDto>> Update(LoginModelDto entity)
     {
+        ServiceResponse<LoginModelDto> sr = new ServiceResponse<LoginModelDto>();
         try
         {
             var result = _db.LoginModel.Update(_mapper.Map<LoginModel>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<LoginModelDto>(result);
+            sr.Data = _mapper.Map<LoginModelDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

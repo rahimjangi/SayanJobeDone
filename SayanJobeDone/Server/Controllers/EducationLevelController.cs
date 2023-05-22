@@ -52,7 +52,7 @@ public class EducationLevelController : ControllerBase
         var objectFromDb = await _repo.EducationLevel.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.EducationLevel.Remove(objectFromDb);
+            await _repo.EducationLevel.Remove(objectFromDb.Data!);
 
         }
         return Ok();

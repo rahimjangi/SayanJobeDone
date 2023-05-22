@@ -55,7 +55,7 @@ public class RateTypeController : ControllerBase
         var objectFromDb = await _repo.RateType.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.RateType.Remove(objectFromDb);
+            await _repo.RateType.Remove(objectFromDb.Data!);
 
         }
         return Ok();

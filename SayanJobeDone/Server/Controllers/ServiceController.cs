@@ -53,7 +53,7 @@ public class ServiceController : ControllerBase
         var objectFromDb = await _repo.Service.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.Service.Remove(objectFromDb);
+            await _repo.Service.Remove(objectFromDb.Data!);
 
         }
         return Ok();

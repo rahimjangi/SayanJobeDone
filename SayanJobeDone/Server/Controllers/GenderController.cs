@@ -54,7 +54,7 @@ public class GenderController : ControllerBase
         var objectFromDb = await _repo.Gender.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.Gender.Remove(objectFromDb);
+            await _repo.Gender.Remove(objectFromDb.Data!);
 
         }
         return Ok();

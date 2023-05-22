@@ -49,7 +49,7 @@ public class CategoryController : ControllerBase
     [HttpDelete("[action]")]
     public async Task<ActionResult> Delete(int id)
     {
-        await _repo.Category.Remove(await _repo.Category.GetFirstOrDefault(x => x.Id == id));
+        await _repo.Category.Remove((await _repo.Category.GetFirstOrDefault(x => x.Id == id)).Data!);
         return Ok();
     }
 

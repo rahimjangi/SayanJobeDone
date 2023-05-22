@@ -32,11 +32,13 @@ public class OccupationRepository : IOccupationRepository
         }
     }
 
-    public async Task<List<OccupationDto>> GetAll(Expression<Func<Occupation, bool>>? filter = null, Func<IQueryable<Occupation>, IOrderedQueryable<Occupation>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<OccupationDto>>> GetAll(Expression<Func<Occupation, bool>>? filter = null, Func<IQueryable<Occupation>, IOrderedQueryable<Occupation>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<OccupationDto>> sr = new ServiceResponse<List<OccupationDto>>();
         try
         {
-            return _mapper.Map<List<OccupationDto>>(await _db.Occupations.ToListAsync());
+            sr.Data = _mapper.Map<List<OccupationDto>>(await _db.Occupations.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class OccupationRepository : IOccupationRepository
         }
     }
 
-    public async Task<OccupationDto> GetFirstOrDefault(Expression<Func<Occupation, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<OccupationDto>> GetFirstOrDefault(Expression<Func<Occupation, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<OccupationDto> sr = new ServiceResponse<OccupationDto>();
         try
         {
-            return _mapper.Map<OccupationDto>(await _db.Occupations.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<OccupationDto>(await _db.Occupations.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class OccupationRepository : IOccupationRepository
         }
     }
 
-    public async Task<OccupationDto> Update(OccupationDto entity)
+    public async Task<ServiceResponse<OccupationDto>> Update(OccupationDto entity)
     {
+        ServiceResponse<OccupationDto> sr = new ServiceResponse<OccupationDto>();
         try
         {
             var result = _db.Occupations.Update(_mapper.Map<Occupation>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<OccupationDto>(result);
+            sr.Data = _mapper.Map<OccupationDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

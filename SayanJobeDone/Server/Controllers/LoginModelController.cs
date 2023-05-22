@@ -55,7 +55,7 @@ public class LoginModelController : ControllerBase
         var objectFromDb = await _repo.LoginModel.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.LoginModel.Remove(objectFromDb);
+            await _repo.LoginModel.Remove(objectFromDb.Data!);
 
         }
         return Ok();

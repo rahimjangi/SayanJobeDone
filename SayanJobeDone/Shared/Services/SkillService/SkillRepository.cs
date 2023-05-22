@@ -32,11 +32,13 @@ public class SkillRepository : ISkillRepository
         }
     }
 
-    public async Task<List<SkillDto>> GetAll(Expression<Func<Skill, bool>>? filter = null, Func<IQueryable<Skill>, IOrderedQueryable<Skill>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<SkillDto>>> GetAll(Expression<Func<Skill, bool>>? filter = null, Func<IQueryable<Skill>, IOrderedQueryable<Skill>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<SkillDto>> sr = new ServiceResponse<List<SkillDto>>();
         try
         {
-            return _mapper.Map<List<SkillDto>>(await _db.Skills.ToListAsync());
+            sr.Data = _mapper.Map<List<SkillDto>>(await _db.Skills.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class SkillRepository : ISkillRepository
         }
     }
 
-    public async Task<SkillDto> GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<SkillDto>> GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<SkillDto> sr = new ServiceResponse<SkillDto>();
         try
         {
-            return _mapper.Map<SkillDto>(await _db.Skills.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<SkillDto>(await _db.Skills.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class SkillRepository : ISkillRepository
         }
     }
 
-    public async Task<SkillDto> Update(SkillDto entity)
+    public async Task<ServiceResponse<SkillDto>> Update(SkillDto entity)
     {
+        ServiceResponse<SkillDto> sr = new ServiceResponse<SkillDto>();
         try
         {
             var result = _db.Skills.Update(_mapper.Map<Skill>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<SkillDto>(result);
+            sr.Data = _mapper.Map<SkillDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

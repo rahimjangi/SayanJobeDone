@@ -32,11 +32,13 @@ public class PreviousEmploymentRepository : IPreviousEmploymentRepository
         }
     }
 
-    public async Task<List<PreviousEmploymentDto>> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<PreviousEmploymentDto>>> GetAll(Expression<Func<PreviousEmployment, bool>>? filter = null, Func<IQueryable<PreviousEmployment>, IOrderedQueryable<PreviousEmployment>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<PreviousEmploymentDto>> sr = new ServiceResponse<List<PreviousEmploymentDto>>();
         try
         {
-            return _mapper.Map<List<PreviousEmploymentDto>>(await _db.PreviousEmployments.ToListAsync());
+            sr.Data = _mapper.Map<List<PreviousEmploymentDto>>(await _db.PreviousEmployments.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class PreviousEmploymentRepository : IPreviousEmploymentRepository
         }
     }
 
-    public async Task<PreviousEmploymentDto> GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<PreviousEmploymentDto>> GetFirstOrDefault(Expression<Func<PreviousEmployment, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<PreviousEmploymentDto> sr = new ServiceResponse<PreviousEmploymentDto>();
         try
         {
-            return _mapper.Map<PreviousEmploymentDto>(await _db.PreviousEmployments.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<PreviousEmploymentDto>(await _db.PreviousEmployments.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class PreviousEmploymentRepository : IPreviousEmploymentRepository
         }
     }
 
-    public async Task<PreviousEmploymentDto> Update(PreviousEmploymentDto entity)
+    public async Task<ServiceResponse<PreviousEmploymentDto>> Update(PreviousEmploymentDto entity)
     {
+        ServiceResponse<PreviousEmploymentDto> sr = new ServiceResponse<PreviousEmploymentDto>();
         try
         {
             var result = _db.PreviousEmployments.Update(_mapper.Map<PreviousEmployment>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<PreviousEmploymentDto>(result);
+            sr.Data = _mapper.Map<PreviousEmploymentDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

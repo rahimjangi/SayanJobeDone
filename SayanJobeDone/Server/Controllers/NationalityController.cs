@@ -55,7 +55,7 @@ public class NationalityController : ControllerBase
         var objectFromDb = await _repo.Nationality.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.Nationality.Remove(objectFromDb);
+            await _repo.Nationality.Remove(objectFromDb.Data!);
 
         }
         return Ok();

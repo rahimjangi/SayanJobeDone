@@ -52,7 +52,7 @@ public class LanguageController : ControllerBase
         var objectFromDb = await _repo.Language.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.Language.Remove(objectFromDb);
+            await _repo.Language.Remove(objectFromDb.Data!);
 
         }
         return Ok();

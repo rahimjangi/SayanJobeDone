@@ -32,11 +32,13 @@ public class LanguageRepository : ILanguageRepository
         }
     }
 
-    public async Task<List<LanguageDto>> GetAll(Expression<Func<Language, bool>>? filter = null, Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<LanguageDto>>> GetAll(Expression<Func<Language, bool>>? filter = null, Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<LanguageDto>> sr = new ServiceResponse<List<LanguageDto>>();
         try
         {
-            return _mapper.Map<List<LanguageDto>>(await _db.Languages.ToListAsync());
+            sr.Data = _mapper.Map<List<LanguageDto>>(await _db.Languages.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class LanguageRepository : ILanguageRepository
         }
     }
 
-    public async Task<LanguageDto> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<LanguageDto>> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<LanguageDto> sr = new ServiceResponse<LanguageDto>();
         try
         {
-            return _mapper.Map<LanguageDto>(await _db.Languages.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<LanguageDto>(await _db.Languages.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class LanguageRepository : ILanguageRepository
         }
     }
 
-    public async Task<LanguageDto> Update(LanguageDto entity)
+    public async Task<ServiceResponse<LanguageDto>> Update(LanguageDto entity)
     {
+        ServiceResponse<LanguageDto> sr = new ServiceResponse<LanguageDto>();
         try
         {
             var result = _db.Languages.Update(_mapper.Map<Language>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<LanguageDto>(result);
+            sr.Data = _mapper.Map<LanguageDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

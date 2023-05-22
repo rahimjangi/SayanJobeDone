@@ -32,11 +32,13 @@ public class ServiceProviderRepository : IServiceProviderRepository
         }
     }
 
-    public async Task<List<ServiceProvidersDto>> GetAll(Expression<Func<ServiceProviders, bool>>? filter = null, Func<IQueryable<ServiceProviders>, IOrderedQueryable<ServiceProviders>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<ServiceProvidersDto>>> GetAll(Expression<Func<ServiceProviders, bool>>? filter = null, Func<IQueryable<ServiceProviders>, IOrderedQueryable<ServiceProviders>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<ServiceProvidersDto>> sr = new ServiceResponse<List<ServiceProvidersDto>>();
         try
         {
-            return _mapper.Map<List<ServiceProvidersDto>>(await _db.ServiceProviders.ToListAsync());
+            sr.Data = _mapper.Map<List<ServiceProvidersDto>>(await _db.ServiceProviders.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class ServiceProviderRepository : IServiceProviderRepository
         }
     }
 
-    public async Task<ServiceProvidersDto> GetFirstOrDefault(Expression<Func<ServiceProviders, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<ServiceProvidersDto>> GetFirstOrDefault(Expression<Func<ServiceProviders, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<ServiceProvidersDto> sr = new ServiceResponse<ServiceProvidersDto>();
         try
         {
-            return _mapper.Map<ServiceProvidersDto>(await _db.ServiceProviders.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<ServiceProvidersDto>(await _db.ServiceProviders.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -85,13 +89,15 @@ public class ServiceProviderRepository : IServiceProviderRepository
         }
     }
 
-    public async Task<ServiceProvidersDto> Update(ServiceProvidersDto entity)
+    public async Task<ServiceResponse<ServiceProvidersDto>> Update(ServiceProvidersDto entity)
     {
+        ServiceResponse<ServiceProvidersDto> sr = new ServiceResponse<ServiceProvidersDto>();
         try
         {
             var result = _db.ServiceProviders.Update(_mapper.Map<ServiceProviders>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<ServiceProvidersDto>(result);
+            sr.Data = _mapper.Map<ServiceProvidersDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

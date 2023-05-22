@@ -32,11 +32,13 @@ public class LocationDataRepository : ILocationDataRepository
         }
     }
 
-    public async Task<List<LocationDataDto>> GetAll(Expression<Func<LocationData, bool>>? filter = null, Func<IQueryable<LocationData>, IOrderedQueryable<LocationData>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<LocationDataDto>>> GetAll(Expression<Func<LocationData, bool>>? filter = null, Func<IQueryable<LocationData>, IOrderedQueryable<LocationData>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<LocationDataDto>> sr = new ServiceResponse<List<LocationDataDto>>();
         try
         {
-            return _mapper.Map<List<LocationDataDto>>(await _db.LocationDatas.ToListAsync());
+            sr.Data = _mapper.Map<List<LocationDataDto>>(await _db.LocationDatas.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class LocationDataRepository : ILocationDataRepository
         }
     }
 
-    public async Task<LocationDataDto> GetFirstOrDefault(Expression<Func<LocationData, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<LocationDataDto>> GetFirstOrDefault(Expression<Func<LocationData, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<LocationDataDto> sr = new ServiceResponse<LocationDataDto>();
         try
         {
-            return _mapper.Map<LocationDataDto>(await _db.LocationDatas.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<LocationDataDto>(await _db.LocationDatas.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class LocationDataRepository : ILocationDataRepository
         }
     }
 
-    public async Task<LocationDataDto> Update(LocationDataDto entity)
+    public async Task<ServiceResponse<LocationDataDto>> Update(LocationDataDto entity)
     {
+        ServiceResponse<LocationDataDto> sr = new ServiceResponse<LocationDataDto>();
         try
         {
             var result = _db.LocationDatas.Update(_mapper.Map<LocationData>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<LocationDataDto>(result);
+            sr.Data = _mapper.Map<LocationDataDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

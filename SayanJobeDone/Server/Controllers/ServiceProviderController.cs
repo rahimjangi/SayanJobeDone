@@ -54,7 +54,7 @@ public class ServiceProviderController : ControllerBase
         var objectFromDb = await _repo.ServiceProviders.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.ServiceProviders.Remove(objectFromDb);
+            await _repo.ServiceProviders.Remove(objectFromDb.Data!);
 
         }
         return Ok();

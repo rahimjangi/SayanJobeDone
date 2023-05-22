@@ -33,11 +33,13 @@ public class MobilePhoneRepository : IMobilePhoneRepository
 
     }
 
-    public async Task<List<MobilePhoneDto>> GetAll(Expression<Func<MobilePhone, bool>>? filter = null, Func<IQueryable<MobilePhone>, IOrderedQueryable<MobilePhone>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<MobilePhoneDto>>> GetAll(Expression<Func<MobilePhone, bool>>? filter = null, Func<IQueryable<MobilePhone>, IOrderedQueryable<MobilePhone>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<MobilePhoneDto>> sr = new ServiceResponse<List<MobilePhoneDto>>();
         try
         {
-            return _mapper.Map<List<MobilePhoneDto>>(await _db.MobilePhones.ToListAsync());
+            sr.Data = _mapper.Map<List<MobilePhoneDto>>(await _db.MobilePhones.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -46,11 +48,13 @@ public class MobilePhoneRepository : IMobilePhoneRepository
         }
     }
 
-    public async Task<MobilePhoneDto> GetFirstOrDefault(Expression<Func<MobilePhone, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<MobilePhoneDto>> GetFirstOrDefault(Expression<Func<MobilePhone, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<MobilePhoneDto> sr = new ServiceResponse<MobilePhoneDto>();
         try
         {
-            return _mapper.Map<MobilePhoneDto>(await _db.MobilePhones.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<MobilePhoneDto>(await _db.MobilePhones.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -87,13 +91,15 @@ public class MobilePhoneRepository : IMobilePhoneRepository
         }
     }
 
-    public async Task<MobilePhoneDto> Update(MobilePhoneDto entity)
+    public async Task<ServiceResponse<MobilePhoneDto>> Update(MobilePhoneDto entity)
     {
+        ServiceResponse<MobilePhoneDto> sr = new ServiceResponse<MobilePhoneDto>();
         try
         {
             var result = _db.MobilePhones.Update(_mapper.Map<MobilePhone>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<MobilePhoneDto>(result);
+            sr.Data = _mapper.Map<MobilePhoneDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

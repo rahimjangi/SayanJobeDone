@@ -32,11 +32,13 @@ public class NationalityRepository : INationalityRepository
         }
     }
 
-    public async Task<List<NationalityDto>> GetAll(Expression<Func<Nationality, bool>>? filter = null, Func<IQueryable<Nationality>, IOrderedQueryable<Nationality>>? orderby = null, string? includeProperties = null)
+    public async Task<ServiceResponse<List<NationalityDto>>> GetAll(Expression<Func<Nationality, bool>>? filter = null, Func<IQueryable<Nationality>, IOrderedQueryable<Nationality>>? orderby = null, string? includeProperties = null)
     {
+        ServiceResponse<List<NationalityDto>> sr = new ServiceResponse<List<NationalityDto>>();
         try
         {
-            return _mapper.Map<List<NationalityDto>>(await _db.Nationalities.ToListAsync());
+            sr.Data = _mapper.Map<List<NationalityDto>>(await _db.Nationalities.ToListAsync());
+            return sr;
         }
         catch (Exception e)
         {
@@ -45,11 +47,13 @@ public class NationalityRepository : INationalityRepository
         }
     }
 
-    public async Task<NationalityDto> GetFirstOrDefault(Expression<Func<Nationality, bool>>? filter = null, string? includeProperties = null)
+    public async Task<ServiceResponse<NationalityDto>> GetFirstOrDefault(Expression<Func<Nationality, bool>>? filter = null, string? includeProperties = null)
     {
+        ServiceResponse<NationalityDto> sr = new ServiceResponse<NationalityDto>();
         try
         {
-            return _mapper.Map<NationalityDto>(await _db.Nationalities.FirstOrDefaultAsync(filter!));
+            sr.Data = _mapper.Map<NationalityDto>(await _db.Nationalities.FirstOrDefaultAsync(filter!));
+            return sr;
         }
         catch (Exception e)
         {
@@ -86,13 +90,15 @@ public class NationalityRepository : INationalityRepository
         }
     }
 
-    public async Task<NationalityDto> Update(NationalityDto entity)
+    public async Task<ServiceResponse<NationalityDto>> Update(NationalityDto entity)
     {
+        ServiceResponse<NationalityDto> sr = new ServiceResponse<NationalityDto>();
         try
         {
             var result = _db.Nationalities.Update(_mapper.Map<Nationality>(entity));
             await _db.SaveChangesAsync();
-            return _mapper.Map<NationalityDto>(result);
+            sr.Data = _mapper.Map<NationalityDto>(result);
+            return sr;
         }
         catch (Exception e)
         {

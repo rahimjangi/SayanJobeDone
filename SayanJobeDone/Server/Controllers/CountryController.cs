@@ -53,7 +53,7 @@ public class CountryController : ControllerBase
         var objectFromDb = await _repo.Country.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.Country.Remove(objectFromDb);
+            await _repo.Country.Remove(objectFromDb.Data!);
 
         }
         return Ok();

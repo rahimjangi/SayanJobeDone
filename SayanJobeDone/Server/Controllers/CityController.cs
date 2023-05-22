@@ -53,7 +53,7 @@ public class CityController : ControllerBase
         var objectFromDb = await _repo.City.GetFirstOrDefault(x => x.Id == id);
         if (objectFromDb != null)
         {
-            await _repo.City.Remove(objectFromDb);
+            await _repo.City.Remove(objectFromDb.Data!);
 
         }
         return Ok();
