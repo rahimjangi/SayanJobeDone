@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.GenderService;
+namespace SayanJobeDone.Client.Services.GenderService;
 
 public class GenderRepository : IGenderRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public GenderRepository(ApplicationDbContext db, Mapper mapper)
+    public GenderRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<GenderDto> EntityProperty { get; set; } = new List<GenderDto>();
 
     public async Task Add(GenderDto entity)
     {

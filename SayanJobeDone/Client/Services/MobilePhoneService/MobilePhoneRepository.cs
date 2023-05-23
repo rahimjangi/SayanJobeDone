@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.MobilePhoneService;
+namespace SayanJobeDone.Client.Services.MobilePhoneService;
 
 public class MobilePhoneRepository : IMobilePhoneRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public MobilePhoneRepository(ApplicationDbContext db, Mapper mapper)
+    public MobilePhoneRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<MobilePhoneDto> EntityProperty { get; set; } = new List<MobilePhoneDto>();
 
     public async Task Add(MobilePhoneDto entity)
     {

@@ -9,14 +9,18 @@ namespace SayanJobeDone.Client.Services.CagegoryService;
 
 public class CategoryRepository : ICategoryRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public CategoryRepository(ApplicationDbContext db, Mapper mapper)
+    public CategoryRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<CategoryDto> EntityProperty { get; set; } = new List<CategoryDto>();
 
     public async Task Add(CategoryDto entity)
     {

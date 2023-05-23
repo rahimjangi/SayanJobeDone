@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.RateTypeService;
+namespace SayanJobeDone.Client.Services.RateTypeService;
 
 public class RateTypeRepository : IRateTypeRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public RateTypeRepository(ApplicationDbContext db, Mapper mapper)
+    public RateTypeRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<RateTypeDto> EntityProperty { get; set; } = new List<RateTypeDto>();
 
     public async Task Add(RateTypeDto entity)
     {

@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.CityService;
+namespace SayanJobeDone.Client.Services.CityService;
 
 public class CityRepository : ICityRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public CityRepository(ApplicationDbContext db, Mapper mapper)
+    public CityRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<CityDto> EntityProperty { get; set; } = new List<CityDto>();
 
     public async Task Add(CityDto entity)
     {

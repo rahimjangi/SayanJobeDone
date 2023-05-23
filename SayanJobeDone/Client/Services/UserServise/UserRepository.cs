@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.UserServise;
+namespace SayanJobeDone.Client.Services.UserServise;
 
 public class UserRepository : IUserRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public UserRepository(ApplicationDbContext db, Mapper mapper)
+    public UserRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<UserDto> EntityProperty { get; set; } = new List<UserDto>();
 
     public async Task Add(UserDto entity)
     {

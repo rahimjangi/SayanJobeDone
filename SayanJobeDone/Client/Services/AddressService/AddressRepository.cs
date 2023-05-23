@@ -4,44 +4,38 @@ using SayanJobeDone.Shared.Data;
 using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
+using System.Net.Http.Json;
 
-namespace SayanJobeDone.Shared.Services.AddressService;
+namespace SayanJobeDone.Client.Services.AddressService;
 
 public class AddressRepository : IAddressRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public AddressRepository(ApplicationDbContext db, Mapper mapper)
+    public AddressRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
+
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<AddressDto> EntityProperty { get; set; } = new List<AddressDto>();
 
     public async Task Add(AddressDto entity)
     {
         try
         {
-            var address = _mapper.Map<Address>(entity);
-            var country = await _db.Countries.FirstOrDefaultAsync(x => x.Id == entity.CountryId);
-            address.Country = country;
-            var cityFromDb = await _db.Cities.FirstOrDefaultAsync(x => x.Id == entity.CityId);
-            if (cityFromDb != null)
-            {
-                entity.CityId = cityFromDb.Id;
-                await _db.Addresses.AddAsync(address);
-                await _db.SaveChangesAsync();
-            }
-            else
-            {
-                throw new Exception("City does not exists!");
-            }
+
         }
         catch (Exception e)
         {
 
             throw new Exception(e.Message);
         }
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<List<AddressDto>>> GetAll(Expression<Func<Address, bool>>? filter = null, Func<IQueryable<Address>, IOrderedQueryable<Address>>? orderby = null, string? includeProperties = null)
@@ -49,12 +43,13 @@ public class AddressRepository : IAddressRepository
         ServiceResponse<List<AddressDto>> sr = new ServiceResponse<List<AddressDto>>();
         try
         {
-            var result = await _db.Addresses.ToListAsync();
-            var addressDtos = _mapper.Map<List<AddressDto>>(result);
-            sr.Data = addressDtos;
-            sr.Message = "Success";
-            sr.Status = true;
+            var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<AddressDto>>>("api/Address/GetAll");
+            if (result != null && result.Status && result.Data != null)
+            {
+                EntityProperty = result.Data;
+            }
             return sr;
+
 
         }
         catch (Exception e)

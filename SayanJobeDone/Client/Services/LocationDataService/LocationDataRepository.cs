@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.LocationDataService;
+namespace SayanJobeDone.Client.Services.LocationDataService;
 
 public class LocationDataRepository : ILocationDataRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public LocationDataRepository(ApplicationDbContext db, Mapper mapper)
+    public LocationDataRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<LocationDataDto> EntityProperty { get; set; } = new List<LocationDataDto>();
 
     public async Task Add(LocationDataDto entity)
     {

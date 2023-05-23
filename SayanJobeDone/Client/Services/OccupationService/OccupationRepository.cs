@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.OccupationService;
+namespace SayanJobeDone.Client.Services.OccupationService;
 
 public class OccupationRepository : IOccupationRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public OccupationRepository(ApplicationDbContext db, Mapper mapper)
+    public OccupationRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<OccupationDto> EntityProperty { get; set; } = new List<OccupationDto>();
 
     public async Task Add(OccupationDto entity)
     {

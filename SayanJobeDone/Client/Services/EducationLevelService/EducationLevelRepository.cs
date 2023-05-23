@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.EducationLevelService;
+namespace SayanJobeDone.Client.Services.EducationLevelService;
 
 public class EducationLevelRepository : IEducationLevelRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public EducationLevelRepository(ApplicationDbContext db, Mapper mapper)
+    public EducationLevelRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<EducationLevelDto> EntityProperty { get; set; } = new List<EducationLevelDto>();
 
     public async Task Add(EducationLevelDto entity)
     {

@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.SkillService;
+namespace SayanJobeDone.Client.Services.SkillService;
 
 public class SkillRepository : ISkillRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public SkillRepository(ApplicationDbContext db, Mapper mapper)
+    public SkillRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<SkillDto> EntityProperty { get; set; } = new List<SkillDto>();
 
     public async Task Add(SkillDto entity)
     {

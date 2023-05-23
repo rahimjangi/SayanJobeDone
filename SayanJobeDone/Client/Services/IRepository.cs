@@ -1,10 +1,10 @@
-﻿using SayanJobeDone.Shared.Services;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace SayanJobeDone.Client.Services
 {
     public interface IRepository<T, P> where T : class where P : class
     {
+        List<T> EntityProperty { get; set; }
         Task Add(T entity);
         Task<ServiceResponse<T>> Update(T entity);
         Task Remove(T entity);

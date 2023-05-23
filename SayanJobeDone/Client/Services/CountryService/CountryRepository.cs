@@ -5,17 +5,21 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.CountryService;
+namespace SayanJobeDone.Client.Services.CountryService;
 public class CountryRepository : ICountryRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public CountryRepository(ApplicationDbContext db, Mapper mapper)
+    public CountryRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<CountryDto> EntityProperty { get; set; } = new List<CountryDto>();
 
     public async Task Add(CountryDto entity)
     {

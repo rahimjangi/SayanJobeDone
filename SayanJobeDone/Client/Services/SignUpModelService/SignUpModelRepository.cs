@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.SignUpModelService;
+namespace SayanJobeDone.Client.Services.SignUpModelService;
 
 public class SignUpModelRepository : ISignUpModelRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public SignUpModelRepository(ApplicationDbContext db, Mapper mapper)
+    public SignUpModelRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<SignUpModelDto> EntityProperty { get; set; } = new List<SignUpModelDto>();
 
     public async Task Add(SignUpModelDto entity)
     {

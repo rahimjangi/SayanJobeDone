@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.FileInformationService;
+namespace SayanJobeDone.Client.Services.FileInformationService;
 
 public class FileInformationRepository : IFileInformationRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public FileInformationRepository(ApplicationDbContext db, Mapper mapper)
+    public FileInformationRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<FileInformationDto> EntityProperty { get; set; } = new List<FileInformationDto>();
 
     public async Task Add(FileInformationDto entity)
     {

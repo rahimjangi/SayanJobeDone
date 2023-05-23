@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.LoginModelService;
+namespace SayanJobeDone.Client.Services.LoginModelService;
 
 public class LoginModelRepository : ILoginModelRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public LoginModelRepository(ApplicationDbContext db, Mapper mapper)
+    public LoginModelRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<LoginModelDto> EntityProperty { get; set; } = new List<LoginModelDto>();
 
     public async Task Add(LoginModelDto entity)
     {

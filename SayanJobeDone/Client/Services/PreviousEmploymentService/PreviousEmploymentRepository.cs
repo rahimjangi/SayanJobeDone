@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.PreviousEmploymentService;
+namespace SayanJobeDone.Client.Services.PreviousEmploymentService;
 
 public class PreviousEmploymentRepository : IPreviousEmploymentRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public PreviousEmploymentRepository(ApplicationDbContext db, Mapper mapper)
+    public PreviousEmploymentRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<PreviousEmploymentDto> EntityProperty { get; set; } = new List<PreviousEmploymentDto>();
 
     public async Task Add(PreviousEmploymentDto entity)
     {

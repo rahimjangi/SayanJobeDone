@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.NationalityService;
+namespace SayanJobeDone.Client.Services.NationalityService;
 
 public class NationalityRepository : INationalityRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public NationalityRepository(ApplicationDbContext db, Mapper mapper)
+    public NationalityRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<NationalityDto> EntityProperty { get; set; } = new List<NationalityDto>();
 
     public async Task Add(NationalityDto entity)
     {

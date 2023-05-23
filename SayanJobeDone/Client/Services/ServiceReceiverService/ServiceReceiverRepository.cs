@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.ServiceReceiverService;
+namespace SayanJobeDone.Client.Services.ServiceReceiverService;
 
 public class ServiceReceiverRepository : IServiceReceiverRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public ServiceReceiverRepository(ApplicationDbContext db, Mapper mapper)
+    public ServiceReceiverRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<ServiceReceiverDto> EntityProperty { get; set; } = new List<ServiceReceiverDto>();
 
     public async Task Add(ServiceReceiverDto entity)
     {

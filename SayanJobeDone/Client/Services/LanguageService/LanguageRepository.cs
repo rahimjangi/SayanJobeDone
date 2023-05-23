@@ -5,18 +5,22 @@ using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 
-namespace SayanJobeDone.Shared.Services.LanguageService;
+namespace SayanJobeDone.Client.Services.LanguageService;
 
 public class LanguageRepository : ILanguageRepository
 {
+    private readonly HttpClient _httpClient;
     private readonly ApplicationDbContext _db;
     private readonly Mapper _mapper;
 
-    public LanguageRepository(ApplicationDbContext db, Mapper mapper)
+    public LanguageRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
     {
         _db = db;
         _mapper = mapper;
+        _httpClient = httpClient;
     }
+
+    public List<LanguageDto> EntityProperty { get; set; } = new List<LanguageDto>();
 
     public async Task Add(LanguageDto entity)
     {
