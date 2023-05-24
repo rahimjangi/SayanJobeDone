@@ -1,39 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Dtos;
+﻿using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
+using System.Net.Http.Json;
 
 namespace SayanJobeDone.Client.Services.EducationLevelService;
 
 public class EducationLevelRepository : IEducationLevelRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly ApplicationDbContext _db;
-    private readonly Mapper _mapper;
 
-    public EducationLevelRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
+    public EducationLevelRepository(HttpClient httpClient)
     {
-        _db = db;
-        _mapper = mapper;
         _httpClient = httpClient;
     }
 
     public List<EducationLevelDto> EntityProperty { get; set; } = new List<EducationLevelDto>();
 
-    public async Task Add(EducationLevelDto entity)
+    public Task Add(EducationLevelDto entity)
     {
-        try
-        {
-            await _db.EducationLevels.AddAsync(_mapper.Map<EducationLevel>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<List<EducationLevelDto>>> GetAll(Expression<Func<EducationLevel, bool>>? filter = null, Func<IQueryable<EducationLevel>, IOrderedQueryable<EducationLevel>>? orderby = null, string? includeProperties = null)
@@ -41,10 +26,14 @@ public class EducationLevelRepository : IEducationLevelRepository
         ServiceResponse<List<EducationLevelDto>> sr = new ServiceResponse<List<EducationLevelDto>>();
         try
         {
-            var result = _mapper.Map<List<EducationLevelDto>>(await _db.EducationLevels.ToListAsync());
-            await _db.SaveChangesAsync();
-            sr.Data = result;
+            var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<EducationLevelDto>>>("api/EducationLevel/GetAll");
+            if (result != null && result.Status && result.Data != null)
+            {
+                EntityProperty = result.Data;
+            }
             return sr;
+
+
         }
         catch (Exception e)
         {
@@ -53,63 +42,23 @@ public class EducationLevelRepository : IEducationLevelRepository
         }
     }
 
-    public async Task<ServiceResponse<EducationLevelDto>> GetFirstOrDefault(Expression<Func<EducationLevel, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceResponse<EducationLevelDto>> GetFirstOrDefault(Expression<Func<EducationLevel, bool>>? filter = null, string? includeProperties = null)
     {
-        ServiceResponse<EducationLevelDto> sr = new ServiceResponse<EducationLevelDto>();
-        try
-        {
-            sr.Data = _mapper.Map<EducationLevelDto>(await _db.EducationLevels.FirstOrDefaultAsync(filter!));
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task Remove(EducationLevelDto entity)
+    public Task Remove(EducationLevelDto entity)
     {
-        try
-        {
-            _db.EducationLevels.Remove(_mapper.Map<EducationLevel>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task RemoveRange(IEnumerable<EducationLevelDto> entities)
+    public Task RemoveRange(IEnumerable<EducationLevelDto> entities)
     {
-        try
-        {
-            _db.EducationLevels.RemoveRange(_mapper.Map<EducationLevel>(entities));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task<ServiceResponse<EducationLevelDto>> Update(EducationLevelDto entity)
+    public Task<ServiceResponse<EducationLevelDto>> Update(EducationLevelDto entity)
     {
-        ServiceResponse<EducationLevelDto> sr = new ServiceResponse<EducationLevelDto>();
-        try
-        {
-            var result = _mapper.Map<EducationLevelDto>(_db.EducationLevels.Update(_mapper.Map<EducationLevel>(entity)));
-            await _db.SaveChangesAsync();
-            sr.Data = result;
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 }

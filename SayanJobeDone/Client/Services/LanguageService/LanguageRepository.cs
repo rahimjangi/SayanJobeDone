@@ -1,39 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Dtos;
+﻿using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
+using System.Net.Http.Json;
 
 namespace SayanJobeDone.Client.Services.LanguageService;
 
 public class LanguageRepository : ILanguageRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly ApplicationDbContext _db;
-    private readonly Mapper _mapper;
 
-    public LanguageRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
+    public LanguageRepository(HttpClient httpClient)
     {
-        _db = db;
-        _mapper = mapper;
         _httpClient = httpClient;
     }
 
     public List<LanguageDto> EntityProperty { get; set; } = new List<LanguageDto>();
 
-    public async Task Add(LanguageDto entity)
+    public Task Add(LanguageDto entity)
     {
-        try
-        {
-            await _db.Languages.AddAsync(_mapper.Map<Language>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<List<LanguageDto>>> GetAll(Expression<Func<Language, bool>>? filter = null, Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderby = null, string? includeProperties = null)
@@ -41,8 +26,14 @@ public class LanguageRepository : ILanguageRepository
         ServiceResponse<List<LanguageDto>> sr = new ServiceResponse<List<LanguageDto>>();
         try
         {
-            sr.Data = _mapper.Map<List<LanguageDto>>(await _db.Languages.ToListAsync());
+            var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<LanguageDto>>>("api/Language/GetAll");
+            if (result != null && result.Status && result.Data != null)
+            {
+                EntityProperty = result.Data;
+            }
             return sr;
+
+
         }
         catch (Exception e)
         {
@@ -51,63 +42,23 @@ public class LanguageRepository : ILanguageRepository
         }
     }
 
-    public async Task<ServiceResponse<LanguageDto>> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceResponse<LanguageDto>> GetFirstOrDefault(Expression<Func<Language, bool>>? filter = null, string? includeProperties = null)
     {
-        ServiceResponse<LanguageDto> sr = new ServiceResponse<LanguageDto>();
-        try
-        {
-            sr.Data = _mapper.Map<LanguageDto>(await _db.Languages.FirstOrDefaultAsync(filter!));
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task Remove(LanguageDto entity)
+    public Task Remove(LanguageDto entity)
     {
-        try
-        {
-            _db.Languages.Remove(_mapper.Map<Language>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task RemoveRange(IEnumerable<LanguageDto> entities)
+    public Task RemoveRange(IEnumerable<LanguageDto> entities)
     {
-        try
-        {
-            _db.Languages.RemoveRange(_mapper.Map<IEnumerable<Language>>(entities));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task<ServiceResponse<LanguageDto>> Update(LanguageDto entity)
+    public Task<ServiceResponse<LanguageDto>> Update(LanguageDto entity)
     {
-        ServiceResponse<LanguageDto> sr = new ServiceResponse<LanguageDto>();
-        try
-        {
-            var result = _db.Languages.Update(_mapper.Map<Language>(entity));
-            await _db.SaveChangesAsync();
-            sr.Data = _mapper.Map<LanguageDto>(result);
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 }

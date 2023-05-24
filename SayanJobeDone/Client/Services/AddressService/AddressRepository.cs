@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Dtos;
+﻿using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
 using System.Net.Http.Json;
@@ -11,20 +8,16 @@ namespace SayanJobeDone.Client.Services.AddressService;
 public class AddressRepository : IAddressRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly ApplicationDbContext _db;
-    private readonly Mapper _mapper;
 
-    public AddressRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
+    public AddressRepository(HttpClient httpClient)
     {
 
-        _db = db;
-        _mapper = mapper;
         _httpClient = httpClient;
     }
 
     public List<AddressDto> EntityProperty { get; set; } = new List<AddressDto>();
 
-    public async Task Add(AddressDto entity)
+    public Task Add(AddressDto entity)
     {
         try
         {
@@ -64,14 +57,7 @@ public class AddressRepository : IAddressRepository
         ServiceResponse<AddressDto> sr = new ServiceResponse<AddressDto>();
         try
         {
-            var result = new AddressDto();
-            if (filter != null)
-            {
-                result = _mapper.Map<AddressDto>(await _db.Addresses.FirstOrDefaultAsync(filter));
-            }
-            sr.Data = result;
-            sr.Status = true;
-            sr.Message = "Success";
+
             return sr;
         }
         catch (Exception e)
@@ -86,8 +72,7 @@ public class AddressRepository : IAddressRepository
     {
         try
         {
-            _db.Addresses.Remove(_mapper.Map<Address>(entity));
-            await _db.SaveChangesAsync();
+
         }
         catch (Exception e)
         {
@@ -100,8 +85,7 @@ public class AddressRepository : IAddressRepository
     {
         try
         {
-            _db.RemoveRange(entities);
-            await _db.SaveChangesAsync();
+
         }
         catch (Exception e)
         {
@@ -115,12 +99,7 @@ public class AddressRepository : IAddressRepository
         ServiceResponse<AddressDto> sr = new ServiceResponse<AddressDto>();
         try
         {
-            var updatedObj = _db.Addresses.Update(_mapper.Map<Address>(entity));
-            await _db.SaveChangesAsync();
-            var result = _mapper.Map<AddressDto>(updatedObj.Entity);
-            sr.Status = true;
-            sr.Data = result;
-            sr.Message = "Success";
+
             return sr;
         }
         catch (Exception e)

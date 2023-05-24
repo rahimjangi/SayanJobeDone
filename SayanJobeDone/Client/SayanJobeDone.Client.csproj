@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorGoogleMaps" Version="3.0.6" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.15" PrivateAssets="all" />
     <PackageReference Include="Syncfusion.Blazor.Maps" Version="21.2.4" />
@@ -18,7 +19,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Category\" />
+    <Folder Include="Pages\AdministrativeSection\CategoryPages\" />
+    <Folder Include="Pages\AdministrativeSection\CityPages\" />
+    <Folder Include="Pages\AdministrativeSection\CountryPages\" />
+    <Folder Include="Pages\AdministrativeSection\EducationLevelPages\" />
+    <Folder Include="Pages\AdministrativeSection\EmploymentStatusPages\" />
+    <Folder Include="Pages\AdministrativeSection\FileInformationPages\" />
+    <Folder Include="Pages\AdministrativeSection\GenderPages\" />
+    <Folder Include="Pages\AdministrativeSection\LanguagePages\" />
+    <Folder Include="Pages\AdministrativeSection\LocationDataPages\" />
+    <Folder Include="Pages\AdministrativeSection\LoginModelPages\" />
+    <Folder Include="Pages\AdministrativeSection\MobilePhonePages\" />
+    <Folder Include="Pages\AdministrativeSection\NationalityPages\" />
+    <Folder Include="Pages\AdministrativeSection\OccupationPages\" />
+    <Folder Include="Pages\AdministrativeSection\PreviousEmploymentPages\" />
+    <Folder Include="Pages\AdministrativeSection\RateTypePages\" />
+    <Folder Include="Pages\AdministrativeSection\ServicePages\" />
+    <Folder Include="Pages\AdministrativeSection\ServiceProvidersPages\" />
+    <Folder Include="Pages\AdministrativeSection\ServiceReceiverPages\" />
+    <Folder Include="Pages\AdministrativeSection\SignUpModelPages\" />
+    <Folder Include="Pages\AdministrativeSection\SkillPages\" />
+    <Folder Include="Pages\AdministrativeSection\UserPages\" />
     <Folder Include="Pages\Register\" />
   </ItemGroup>
 

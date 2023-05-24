@@ -1,39 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Dtos;
+﻿using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
+using System.Net.Http.Json;
 
 namespace SayanJobeDone.Client.Services.SkillService;
 
 public class SkillRepository : ISkillRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly ApplicationDbContext _db;
-    private readonly Mapper _mapper;
 
-    public SkillRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
+    public SkillRepository(HttpClient httpClient)
     {
-        _db = db;
-        _mapper = mapper;
         _httpClient = httpClient;
     }
 
     public List<SkillDto> EntityProperty { get; set; } = new List<SkillDto>();
 
-    public async Task Add(SkillDto entity)
+    public Task Add(SkillDto entity)
     {
-        try
-        {
-            await _db.Skills.AddAsync(_mapper.Map<Skill>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<List<SkillDto>>> GetAll(Expression<Func<Skill, bool>>? filter = null, Func<IQueryable<Skill>, IOrderedQueryable<Skill>>? orderby = null, string? includeProperties = null)
@@ -41,8 +26,14 @@ public class SkillRepository : ISkillRepository
         ServiceResponse<List<SkillDto>> sr = new ServiceResponse<List<SkillDto>>();
         try
         {
-            sr.Data = _mapper.Map<List<SkillDto>>(await _db.Skills.ToListAsync());
+            var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<SkillDto>>>("api/Skill/GetAll");
+            if (result != null && result.Status && result.Data != null)
+            {
+                EntityProperty = result.Data;
+            }
             return sr;
+
+
         }
         catch (Exception e)
         {
@@ -51,63 +42,23 @@ public class SkillRepository : ISkillRepository
         }
     }
 
-    public async Task<ServiceResponse<SkillDto>> GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceResponse<SkillDto>> GetFirstOrDefault(Expression<Func<Skill, bool>>? filter = null, string? includeProperties = null)
     {
-        ServiceResponse<SkillDto> sr = new ServiceResponse<SkillDto>();
-        try
-        {
-            sr.Data = _mapper.Map<SkillDto>(await _db.Skills.FirstOrDefaultAsync(filter!));
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task Remove(SkillDto entity)
+    public Task Remove(SkillDto entity)
     {
-        try
-        {
-            _db.Skills.Remove(_mapper.Map<Skill>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task RemoveRange(IEnumerable<SkillDto> entities)
+    public Task RemoveRange(IEnumerable<SkillDto> entities)
     {
-        try
-        {
-            _db.Skills.RemoveRange(_mapper.Map<IEnumerable<Skill>>(entities));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task<ServiceResponse<SkillDto>> Update(SkillDto entity)
+    public Task<ServiceResponse<SkillDto>> Update(SkillDto entity)
     {
-        ServiceResponse<SkillDto> sr = new ServiceResponse<SkillDto>();
-        try
-        {
-            var result = _db.Skills.Update(_mapper.Map<Skill>(entity));
-            await _db.SaveChangesAsync();
-            sr.Data = _mapper.Map<SkillDto>(result);
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 }

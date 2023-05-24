@@ -1,39 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SayanJobeDone.Shared.Data;
-using SayanJobeDone.Shared.Dtos;
+﻿using SayanJobeDone.Shared.Dtos;
 using SayanJobeDone.Shared.Models;
 using System.Linq.Expressions;
+using System.Net.Http.Json;
 
 namespace SayanJobeDone.Client.Services.UserServise;
 
 public class UserRepository : IUserRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly ApplicationDbContext _db;
-    private readonly Mapper _mapper;
 
-    public UserRepository(ApplicationDbContext db, Mapper mapper, HttpClient httpClient)
+    public UserRepository(HttpClient httpClient)
     {
-        _db = db;
-        _mapper = mapper;
         _httpClient = httpClient;
     }
 
     public List<UserDto> EntityProperty { get; set; } = new List<UserDto>();
 
-    public async Task Add(UserDto entity)
+    public Task Add(UserDto entity)
     {
-        try
-        {
-            await _db.Users.AddAsync(_mapper.Map<User>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<List<UserDto>>> GetAll(Expression<Func<User, bool>>? filter = null, Func<IQueryable<User>, IOrderedQueryable<User>>? orderby = null, string? includeProperties = null)
@@ -41,8 +26,14 @@ public class UserRepository : IUserRepository
         ServiceResponse<List<UserDto>> sr = new ServiceResponse<List<UserDto>>();
         try
         {
-            sr.Data = _mapper.Map<List<UserDto>>(await _db.Users.ToListAsync());
+            var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<UserDto>>>("api/User/GetAll");
+            if (result != null && result.Status && result.Data != null)
+            {
+                EntityProperty = result.Data;
+            }
             return sr;
+
+
         }
         catch (Exception e)
         {
@@ -51,63 +42,23 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<ServiceResponse<UserDto>> GetFirstOrDefault(Expression<Func<User, bool>>? filter = null, string? includeProperties = null)
+    public Task<ServiceResponse<UserDto>> GetFirstOrDefault(Expression<Func<User, bool>>? filter = null, string? includeProperties = null)
     {
-        ServiceResponse<UserDto> sr = new ServiceResponse<UserDto>();
-        try
-        {
-            sr.Data = _mapper.Map<UserDto>(await _db.Users.FirstOrDefaultAsync(filter!));
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task Remove(UserDto entity)
+    public Task Remove(UserDto entity)
     {
-        try
-        {
-            _db.Users.Remove(_mapper.Map<User>(entity));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task RemoveRange(IEnumerable<UserDto> entities)
+    public Task RemoveRange(IEnumerable<UserDto> entities)
     {
-        try
-        {
-            _db.Users.RemoveRange(_mapper.Map<IEnumerable<User>>(entities));
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 
-    public async Task<ServiceResponse<UserDto>> Update(UserDto entity)
+    public Task<ServiceResponse<UserDto>> Update(UserDto entity)
     {
-        ServiceResponse<UserDto> sr = new ServiceResponse<UserDto>();
-        try
-        {
-            var result = _db.Users.Update(_mapper.Map<User>(entity));
-            await _db.SaveChangesAsync();
-            sr.Data = _mapper.Map<UserDto>(result);
-            return sr;
-        }
-        catch (Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
+        throw new NotImplementedException();
     }
 }
